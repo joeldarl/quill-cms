@@ -1,0 +1,10 @@
+extends ./layout
+
+block content
+    body
+        form(action="/admin/blog/create" method="POST")
+            p Title:
+                input(type="text" name="title" placeholder="")
+            p Text:
+                textarea(id="markdown" name="body" placeholder="")
+            input(type="submit")

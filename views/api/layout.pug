@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body(class="admin-body")
+        div(class="wrap")
+            h1 chaos into magic
+            nav
+                ul
+                    li
+                        a(href='/admin/blog') Manage Blogs
+                    li
+                        a(href='/admin/upload') Upload Image
+            if title
+                h2= title
+            div(class="panel")
+                block content
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css").
+    script(src = 'https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js').
+    script.
+        var simplemde = new SimpleMDE();

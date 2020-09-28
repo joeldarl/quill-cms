@@ -1,0 +1,9 @@
+extends ./layout
+
+block content
+    form(action="/admin/login" method="POST")
+        p Email:
+            input(type="text" name="email" placeholder="")
+        p Password:
+            input(type="text" name="password" placeholder="")
+        input(type="submit")

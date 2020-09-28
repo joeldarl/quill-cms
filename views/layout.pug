@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(class="wrap")
+      div
+        h1= title
+        nav
+          ul
+            li
+              a(href='/') Articles |
+            li
+              a(href='/about') About
+        block content

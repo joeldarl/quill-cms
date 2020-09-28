@@ -1,0 +1,14 @@
+extends ./layout
+
+block content
+    body
+        form(action="/admin/blog/update/"+article.id method="POST")
+            p Title:
+                input(type="text" name="title" value= article.title)
+            p Text:
+                textarea(id="markdown" name="body")
+            input(type="submit")
+    script.
+        window.addEventListener('load', function () {
+            simplemde.value(`#{article.body}`);
+        });

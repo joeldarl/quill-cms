@@ -1,0 +1,11 @@
+extends ./layout
+
+block content
+    body
+        h2= "Register"
+        form(action="/admin/create" method="POST")
+            p Email:
+                input(type="text" name="email" placeholder="")
+            p Password:
+                input(type="text" name="password" placeholder="")
+            input(type="submit")
