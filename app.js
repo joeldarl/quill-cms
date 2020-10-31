@@ -8,13 +8,31 @@ var flash = require('express-flash');
 var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
 const multer = require('multer');
+const arg = require('arg');
 
-//Configure Mongoose
+// mongoose setup
 mongoose.connect('mongodb://localhost/blog', {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.set('debug', true);
+mongoose.set('debug', false);
 require('./models/users');
 require('./models/articles');
 require('./config/passport');
+
+mongoose.promise = global.Promise;
+
+// arguements
+const args = arg({
+    // types
+    '--help':     Boolean,
+    '--version':  Boolean,
+    '--register': Boolean,
+ 
+    // aliases
+    '-r':         '--register',   
+});
+
+if(args['--register'] == true) {
+  require('./register-cli.js').registerPrompt();
+}
 
 var blogRouter = require('./routes/blog');
 var apiBlogRouter = require('./routes/admin/blog');
@@ -22,8 +40,6 @@ var apiIndexRouter = require('./routes/admin/index');
 var aboutRouter = require('./routes/about');
 
 var app = express();
-
-mongoose.promise = global.Promise;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

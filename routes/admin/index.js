@@ -20,7 +20,7 @@ var upload = multer({ storage: storage });
 router.get('/login', auth.optional, function (req, res, next){
     res.render('admin/login');
 });
-router.get('/register', auth.required, function (req, res, next){
+router.get('/register', auth.optional, function (req, res, next){
     res.render('admin/register');
 });
 router.post('/login', auth.optional, users.login);
