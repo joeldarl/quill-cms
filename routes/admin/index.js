@@ -3,7 +3,7 @@ const auth = require('../../auth/auth');
 const users = require('../../controllers/users');
 const multer = require('multer');
 
-// SET STORAGE
+// SET STORAGE for uploads
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/uploads')
@@ -17,17 +17,28 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
+router.get('/', auth.required, function (req, res, next){
+    res.render('admin/index', {title: 'Dashboard'});
+});
+
+// Login routes
 router.get('/login', auth.optional, function (req, res, next){
     res.render('admin/login');
 });
-router.get('/register', auth.optional, function (req, res, next){
+router.post('/login', auth.optional, users.login);
+router.get('/logout', auth.optional, users.logout);
+
+// Register user routes
+router.get('/register', auth.required, function (req, res, next){
     res.render('admin/register');
 });
-router.post('/login', auth.optional, users.login);
+router.post('/create', auth.required, users.create);
+
+// Upload routes
 router.get('/upload', auth.required, users.getUploads);
 router.post('/upload', auth.required, upload.single('file'), users.upload);
-router.post('/create', auth.required, users.create);
-//GET current route (required, only authenticated users have access)
+
+//GET current user route (for testing)
 router.get('/current', auth.required, users.current);
 
 module.exports = router;

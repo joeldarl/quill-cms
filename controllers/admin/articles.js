@@ -39,7 +39,7 @@ exports.read = (req, res, next) => {
             Object.keys(all).forEach(function(article){
                 all[article].body= converter.makeHtml(all[article].body);
             });
-            res.render('admin/blog', {articles: all, title: config.title, moment: moment})
+            res.render('admin/articles', {articles: all, title: 'Articles', moment: moment})
         }
     });
 };
@@ -47,7 +47,7 @@ exports.read = (req, res, next) => {
 exports.edit = async (req, res, next) => {
     try {
         const article = await articles.findOne({ _id: req.params.id });
-        res.render('admin/edit', {article, title: 'Edit Article'});
+        res.render('admin/articles/edit', {article, title: 'Edit Article'});
     } catch {
         res.status(404);
         res.send({ error: "Post doesn't exist!" });
@@ -65,7 +65,7 @@ exports.update = (req, res, next) => {
             article.title = articleUpdated.title;
             article.body = articleUpdated.body;
             article.save();
-            res.redirect('/admin/blog');
+            res.redirect('/admin/articles');
         }
     });
 };
@@ -76,7 +76,7 @@ exports.delete = (req, res, next) => {
             return res.sendStatus(400);
         }
         else {
-            res.redirect('/admin/blog');
+            res.redirect('/admin/articles');
         }
     });
 };

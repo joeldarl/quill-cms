@@ -14,3 +14,5 @@ A simple blog developed using the MVC pattern and MongoDB. Json web tokens are u
 3. A **secret key** for json web token authetication needs to be added to the config folder. Rename the secret-template.json file to secret.json and add a key.
 
 4. Create your first admin user with `npm run register`. Subsequent users can be registered through the admin interface (/admin/register).
+
+5. To log in and access the admin interface in browser, go to /admin/login.

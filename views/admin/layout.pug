@@ -1,22 +1,11 @@
 doctype html
 html
-    head
-        title= title
-        link(rel='stylesheet', href='/stylesheets/style.css')
+    include ./includes/head.pug
     body(class="admin-body")
-        div(class="wrap")
-            h1=title
-            nav
-                ul
-                    li
-                        a(href='/admin/blog') Manage Blogs
-                    li
-                        a(href='/admin/upload') Upload Image
-            if title
-                h2= title
-            div(class="panel")
+        if (messages.info)
+            span(class="flash-message")= messages.info
+        div(class="container")
+            include ./includes/nav.pug
+            div(class="page-contents")
+                h1=title
                 block content
-    link(rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css").
-    script(src = 'https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js').
-    script.
-        var simplemde = new SimpleMDE();

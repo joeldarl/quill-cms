@@ -1,9 +1,18 @@
-extends ./layout
-
-block content
-    form(action="/admin/login" method="POST")
-        p Email:
-            input(type="text" name="email" placeholder="")
-        p Password:
-            input(type="text" name="password" placeholder="")
-        input(type="submit")
+doctype html
+html
+    include ./includes/head.pug
+    body(class="admin-body login")
+        if (messages.info)
+            span(class="flash-message")= messages.info
+        form(action="/admin/login" method="POST")
+            h1="Login"
+            div.form-line
+                p Email:
+                input(type="text" name="email" placeholder="")
+            div.form-line
+                p Password:
+                input(type="text" name="password" placeholder="")
+            div.form-line.submit-line
+                span
+                input(type="submit" value="Login")
+                span

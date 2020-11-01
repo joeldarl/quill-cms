@@ -8,15 +8,15 @@ passport.use('login', new LocalStrategy({
     passwordField : 'password'
 }, async (email, password, done) => {
     try {
-        const user = await users.findOne({ email });
+        const user = await users.findOne({email});
         if( !user ){
-            return done(null, false, { message : 'User not found'});
+            return done(null, false, {message:'User not found.'});
         }
         const validate = await user.validatePassword(password);
         if( !validate ){
-            return done(null, false, { message : 'Wrong Password'});
+            return done(null, false, {message:'Wrong Password.'});
         }
-        return done(null, user, { message : 'Logged in Successfully'});
+        return done(null, user, {message:'Login Successful.'});
     } catch (error) {
         return done(error);
     }

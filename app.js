@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+var crypto = require('crypto');
 var flash = require('express-flash');
 var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
@@ -36,7 +37,7 @@ if(args['--register'] == true) {
 }
 
 var blogRouter = require('./routes/blog');
-var apiBlogRouter = require('./routes/admin/blog');
+var apiBlogRouter = require('./routes/admin/articles');
 var apiIndexRouter = require('./routes/admin/index');
 var aboutRouter = require('./routes/about');
 
@@ -49,7 +50,12 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+app.use(session({ 
+  secret: crypto.randomBytes(48).toString('hex'), 
+  cookie: { maxAge: 60000 }, 
+  resave: false, 
+  saveUninitialized: false 
+}));
 app.use(cookieParser());
 app.use(flash());
 app.use(sassMiddleware({
@@ -62,7 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', blogRouter);
 app.use('/admin', apiIndexRouter);
-app.use('/admin/blog', apiBlogRouter);
+app.use('/admin/articles', apiBlogRouter);
 app.use('/about', aboutRouter);
 
 // catch 404 and forward to error handler
