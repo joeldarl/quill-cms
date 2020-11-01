@@ -1,11 +1,11 @@
-extends ./layout
+extends ../layout
 
 block content
     body
-        form(action="/admin/blog/update/"+article.id method="POST")
+        form(action="/admin/articles/update/"+article.id method="POST")
             p Title:
                 input(type="text" name="title" value= article.title)
-            p Text:
+            p Content:
                 textarea(id="markdown" name="body")
             input(type="submit")
     script.

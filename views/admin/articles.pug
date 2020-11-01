@@ -1,25 +1,22 @@
 extends ./layout
 
 block content
-    a(class="create-btn" href='/admin/blog/create') Create Article
-    div(class="table articles")
-        div(class="row")
-            div="Title"
-            div="Date"
-            div="Edit"
-            div="Delete"
-        div(class="table-contents")
-            each article in articles
-                div(class="article row")
-                    div
-                        h2=article.title
-                    div
-                        time!= moment(article.date).format("M/D/Y hh:mm")
-                    div
-                        a(href="blog/edit/" + article.id) Edit
-                    div
-                        a(href="blog/delete/" + article.id) Delete
-        link(rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css").
-        script(src = 'https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js').
-        script.
-            var simplemde = new SimpleMDE();
+    a(class="create-btn" href='/admin/articles/create') Create Article
+    if (articles.length)
+        div(class="table articles")
+            div(class="row")
+                div="Title"
+                div="Date"
+                div="Edit"
+                div="Delete"
+            div(class="table-contents")
+                    each article in articles
+                        div(class="article row")
+                            div
+                                h2=article.title
+                            div
+                                time!= moment(article.date).format("M/D/Y hh:mm")
+                            div
+                                a(href="articles/edit/" + article.id) Edit
+                            div
+                                a(href="articles/delete/" + article.id) Delete

@@ -28,7 +28,6 @@ exports.login = (req, res, next) => {
 
         // If no user is returned, authetication has failed
         if (!user) {
-            console.log(info.message);
             req.flash('info', info.message);
             return res.redirect('/admin/login');
         }
@@ -87,20 +86,4 @@ exports.current = (req, res, next) => {
 
             return res.json({ user: user.toAuthJSON() });
         });
-};
-
-exports.upload = (req, res, next) => {
-    const file = req.file;
-    if (!file) {
-        const error = new Error('Please upload a file');
-        error.httpStatusCode = 400;
-        return next(error);
-    }
-    res.send(file);
-};
-
-exports.getUploads = (req, res, next) => {
-    var files = fs.readdirSync('public/uploads');
-    console.log(files);
-    res.render('admin/upload', {files: files, title: 'Uploads'});
 };

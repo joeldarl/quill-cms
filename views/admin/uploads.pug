@@ -1,7 +1,7 @@
 extends ./layout
 
 block content
-    form(method="post" enctype="multipart/form-data" action="/admin/upload")
+    form(class="uploads-form" method="post" enctype="multipart/form-data" action="/admin/uploads")
         input(type="file" name="file")
         input(type="submit" value="submit")
     each file in files

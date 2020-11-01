@@ -70,6 +70,8 @@ nav {
     height: 30px;
     border: 1px solid black;
     padding: 5px; }
+  .admin-body nav {
+    padding: 20px; }
   .admin-body .table {
     width: 100%; }
     .admin-body .table h2, .admin-body .table time {
@@ -150,6 +152,9 @@ nav {
     margin-top: 10px; }
   .admin-body .editor-toolbar {
     opacity: 1; }
+  .admin-body .uploads-form input[type="file"] {
+    border: none;
+    display: block; }
   .admin-body .upload-image-wrap {
     position: relative;
     margin: 10px;
