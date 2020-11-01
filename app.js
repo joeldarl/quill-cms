@@ -9,13 +9,14 @@ var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
 const multer = require('multer');
 const arg = require('arg');
+const config = require('./config/config.json');
 
 // mongoose setup
-mongoose.connect('mongodb://localhost/blog', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(config.databaseUri, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', false);
 require('./models/users');
 require('./models/articles');
-require('./config/passport');
+require('./auth/passport');
 
 mongoose.promise = global.Promise;
 

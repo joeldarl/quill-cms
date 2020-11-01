@@ -4,6 +4,7 @@ var ObjectID = require('mongodb').ObjectID;
 const articles = mongoose.model('articles');
 const showdown = require('showdown');
 const moment = require('moment');
+const config = require('../../config/config.json');
 
 exports.create = (req, res, next) => {
     const article = req.body;
@@ -38,7 +39,7 @@ exports.read = (req, res, next) => {
             Object.keys(all).forEach(function(article){
                 all[article].body= converter.makeHtml(all[article].body);
             });
-            res.render('admin/blog', {articles: all, title: 'Blog', moment: moment})
+            res.render('admin/blog', {articles: all, title: config.title, moment: moment})
         }
     });
 };

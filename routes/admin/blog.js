@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const auth = require('../../config/auth');
+const auth = require('../../auth/auth');
 const blog = require('../../controllers/admin/blog');
 
 router.get('/create', auth.required, function (req, res, next) {

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const auth = require('../../config/auth');
+const auth = require('../../auth/auth');
 const users = require('../../controllers/users');
 const multer = require('multer');
 
