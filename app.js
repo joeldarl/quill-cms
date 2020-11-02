@@ -68,7 +68,13 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // Set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get('env').trim() === 'development' ? err : {};
+
+  // Auth fail redirects to login page
+  if(401 == err.status) {
+    res.redirect('/admin/login');
+    return;
+  }
 
   // Render the error page
   res.status(err.status || 500);

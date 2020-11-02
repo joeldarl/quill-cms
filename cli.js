@@ -66,16 +66,6 @@ async function keygen() {
     return console.log('Secret key for jwt has been generated and saved.');
 }
 
-async function ensureJson(path) {
-    try {
-        await fse.ensureFile(path);
-        console.log(path + ' ready.');
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-
 //Set config
 async function config() {
     console.log("Setting up config...");
@@ -144,7 +134,7 @@ async function register() {
     const User = new users(input);
     User.setPassword(input.password);
     await User.save();
-    
+
     mongoose.connection.close()
     return console.log("User registered.");
 };
@@ -182,4 +172,5 @@ async function initialize() {
     await keygen();
     await config();
     await register();
+    console.log('Initialization complete. Use npm start.')
 }
