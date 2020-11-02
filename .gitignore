@@ -25,6 +25,3 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
-
-secret.json
-config.json
