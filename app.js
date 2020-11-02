@@ -8,7 +8,6 @@ var crypto = require('crypto');
 var flash = require('express-flash');
 var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
-const arg = require('arg');
 const config = require('./config/config.json');
 
 // Mongoose setup
@@ -19,21 +18,6 @@ require('./models/articles');
 require('./auth/passport');
 
 mongoose.promise = global.Promise;
-
-// Arguments
-const args = arg({
-    // types
-    '--help':     Boolean,
-    '--version':  Boolean,
-    '--register': Boolean,
- 
-    // aliases
-    '-r':         '--register',   
-});
-
-if(args['--register'] == true) {
-  require('./register-cli.js').registerPrompt();
-}
 
 // Front of site routes
 var blogRouter = require('./routes/blog');

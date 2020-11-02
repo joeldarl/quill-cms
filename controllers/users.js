@@ -72,7 +72,10 @@ exports.create = (req, res, next) => {
     finalUser.setPassword(user.password);
 
     return finalUser.save()
-        .then(() => res.json({user: finalUser.toAuthJSON()}));
+        .then(() => {
+            req.flash('info', 'User created.');
+            res.redirect('/admin/');
+        });
 };
 
 exports.current = (req, res, next) => {

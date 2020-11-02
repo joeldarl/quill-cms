@@ -9,10 +9,10 @@ A simple blog developed using the MVC pattern and MongoDB. Json web tokens are u
 ## Installation
 1. Download the repository and use the `npm install` command to install package dependancies.
 
-2. The default MongoDB uri is mongodb://localhost/blog. This can be changed within config.json in the config folder. The blog's title can also be changed here.
+2. Use `npm run init` to setup the initial configuration. This will generate a jwt secret key and prompt you for configuring options.
 
-3. A **secret key** for json web token authetication needs to be added to the config folder. Rename the secret-template.json file to secret.json and add a key.
+3. While `npm run init` will prompt you to create an initial user, you can use `npm run register` to create subsequent users, or do so through the admin interface (/admin/register) once authenticated.
 
-4. Create your first admin user with `npm run register`. Subsequent users can be registered through the admin interface (/admin/register).
+4. To log in and access the admin interface in your browser, go to /admin/login.
 
-5. To log in and access the admin interface in browser, go to /admin/login.
+You can edit the config files manually within the config folder if you choose to do so.

@@ -1,4 +1,4 @@
 {
-    "title": "Blog Title",
-    "databaseUri": "mongodb://localhost/blog"
+  "title": "Blog Title",
+  "databaseUri": "mongodb://localhost/blog"
 }

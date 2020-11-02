@@ -26,8 +26,10 @@ exports.create = (req, res, next) => {
     }
 
     const newArticle = new articles(article);
-    req.flash('info', 'Article created.');
-    return newArticle.save().then(() => res.redirect('/admin/articles'));
+    return newArticle.save().then(() => {
+        req.flash('info', 'Article created.');
+        res.redirect('/admin/articles')
+    });
 };
 
 exports.read = (req, res, next) => {
