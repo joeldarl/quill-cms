@@ -6,14 +6,17 @@ const moment = require('moment');
 var url = require('url');
 const config = require('../config/config.json');
 
-exports.read = async (req, res, next) => {
+exports.read = async (req, res) => {
     var navItems = await navigation.find();
 
     try {
         const page = await pages.findOne({ url: req.originalUrl });
+        if(!page) {
+            throw 'Page not found.';
+        }
         res.render('pages', {page, title: config.title, navigation: navItems});
-    } catch {
-        res.status(404);
-        res.send({error: "Page doesn't exist!"});
+    } catch (err) {
+        res.sendStatus(404);
+        // res.render('error', {title: config.title,  error: err });
     }
 };

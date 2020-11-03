@@ -11,7 +11,8 @@ html
           ul
             li
               a(href='/') Articles
-            each navItem in navigation
-              li
-                a(href=navItem.url)= navItem.title
+            if navigation 
+              each navItem in navigation
+                li
+                  a(href=navItem.url)= navItem.title
         block content

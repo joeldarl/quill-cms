@@ -47,36 +47,36 @@ exports.edit = async (req, res, next) => {
         res.render('admin/navigation/edit', {navItem, title: 'Edit Page'});
     } catch {
         res.status(404);
-        res.send({error: "Page doesn't exist!"});
+        res.send({error: "Navigation item doesn't exist!"});
     }
 };
 
 exports.update = (req, res, next) => {
-    return pages.findOne({ _id: req.params.id }).then((page) => {
-        const pageUpdated = req.body;
+    return navItems.findOne({ _id: req.params.id }).then((navItem) => {
+        const navItemUpdated = req.body;
 
-        if(!page) {
+        if(!navItem) {
             return res.sendStatus(400);
         }
         else {
-            page.title = pageUpdated.title;
-            page.url = pageUpdated.url;
-            page.body = pageUpdated.body;
-            page.save();
-            req.flash('info', 'Page updated.');
-            res.redirect('/admin/pages');
+            navItem.title = navItemUpdated.title;
+            navItem.url = navItemUpdated.url;
+            navItem.body = navItemUpdated.body;
+            navItem.save();
+            req.flash('info', 'Navigation item updated.');
+            res.redirect('/admin/navigation');
         }
     });
 };
 
 exports.delete = (req, res, next) => {
-    return pages.deleteOne(req.body.id).then((page) => {
-        if(!page) {
+    return navItems.deleteOne(req.body.id).then((navItem) => {
+        if(!navItem) {
             return res.sendStatus(400);
         }
         else {
-            req.flash('info', 'Page deleted.');
-            res.redirect('/admin/pages');
+            req.flash('info', 'Navigation item deleted.');
+            res.redirect('/admin/navigation');
         }
     });
 };
