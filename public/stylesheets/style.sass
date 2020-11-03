@@ -11,8 +11,8 @@
 body
   padding: 20px
   font: 14px Consolas, Helvetica, Arial, sans-serif
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
   .wrap
     width: 100%
     max-width: 600px
@@ -43,7 +43,7 @@ article
     width: 100%
 
 nav
-  padding: 20px 0px;
+  padding: 20px 0px
   ul
     list-style-type: none
     margin: 0
@@ -59,101 +59,102 @@ nav
 
 // Admin interface
 .admin-body
-  font: 1em Roboto;
+  font: 1em Roboto
   h1
-    margin: 0 0 30px;
-    font: 1.5em Roboto;
+    margin: 0 0 30px
+    font: 1.5em Roboto
   a
-    font: 1em Roboto;
+    font: 1em Roboto
     text-decoration: none
   input
-    height: 30px;
-    border: 1px solid black;
-    padding: 5px;
+    height: 30px
+    border: 1px solid black
+    padding: 5px
   nav
-    padding: 20px;
+    padding: 20px
   .table
-    width: 100%;
+    width: 100%
     h2, time
-      font: 1em Roboto;
-      margin: 0;
+      font: 1em Roboto
+      margin: 0
     .table-contents
-      border: 1px solid black;
+      border: 1px solid black
     .row
-      padding: 20px;
-      display: flex;
-      flex-flow: row wrap;
+      padding: 20px
+      display: flex
+      flex-flow: row wrap
       &:not(:first-child)
-        border-bottom: 1px solid grey;
+        border-bottom: 1px solid grey
       div
-        flex: 1;
+        flex: 1
   .flash-message
-    position: fixed;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    text-align: center;
-    width: 150px;
-    background-color: orange;
-    border-radius: 2px;
-    padding: 20px 10px;
-    display: block;
-    animation: flash 5s both;
+    position: fixed
+    left: 50%
+    right: 50%
+    transform: translate(-50%, -50%)
+    -webkit-transform: translate(-50%, -50%)
+    text-align: center
+    width: 150px
+    background-color: orange
+    border-radius: 2px
+    padding: 20px 10px
+    display: block
+    pointer-events: none
+    animation: flash 5s both
     @keyframes flash
       0%
-        margin-top: -200px;
+        margin-top: -200px
       20%
-        margin-top: 50px;
+        margin-top: 50px
       80%
-        margin-top: 50px;
-        opacity: 1;
+        margin-top: 50px
+        opacity: 1
       100%
-        margin-top: 20px;
-        opacity: 0;
+        margin-top: 20px
+        opacity: 0
 
   // Layout page
   .container
-    border: 1px solid black;
-    width: 70vw;
-    max-width: 800px;
-    margin: auto;
+    border: 1px solid black
+    width: 70vw
+    max-width: 800px
+    margin: auto
   .page-contents
-    padding: 20px;
+    padding: 20px
 
   // Navigation
   nav
     .logout
-      float: right;
-      margin-right: 0;
+      float: right
+      margin-right: 0
 
   // Login page
   &.login
     form
-      border: 1px solid black;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      padding: 30px;
+      border: 1px solid black
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      padding: 30px
       .form-line
-        display: flex;
-        align-items: center; 
-        margin: 0 0 40px;
+        display: flex
+        align-items: center 
+        margin: 0 0 40px
         * 
-          flex-grow: 1;
-          flex-basis: 100%;
+          flex-grow: 1
+          flex-basis: 100%
       .submit-line
-        text-align: center;
-        margin-bottom: 20px;
+        text-align: center
+        margin-bottom: 20px
         input[type="submit"]
-          height: 40px;
-          border: 1px solid black;
-          display: inline-block;
-          padding: 10px 20px;
-          font-size: 1em;
+          height: 40px
+          border: 1px solid black
+          display: inline-block
+          padding: 10px 20px
+          font-size: 1em
       p 
-        margin: 0 20px 0;
+        margin: 0 20px 0
 
   // Article page
   .article
@@ -167,8 +168,8 @@ nav
   // Uploads page
   .uploads-form
     input[type="file"]
-      border: none;
-      display: block;
+      border: none
+      display: block
 
   .upload-image-wrap
     position: relative
