@@ -11,6 +11,7 @@ html
           ul
             li
               a(href='/') Articles
-            li
-              a(href='/about') About
+            each navItem in navigation
+              li
+                a(href=navItem.url)= navItem.title
         block content

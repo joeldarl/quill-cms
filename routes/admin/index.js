@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const auth = require('../../auth/auth');
-const users = require('../../controllers/users');
+const users = require('../../controllers/admin/users');
 const multer = require('multer');
 
 router.get('/', auth.required, function (req, res, next){

@@ -1,9 +1,9 @@
-extends ./layout
+extends ../layout
 
 block content
     a(class="create-btn" href='/admin/articles/create') Create Article
     if (articles.length)
-        div(class="table articles")
+        div(class="table items")
             div(class="row")
                 div="Title"
                 div="Date"
@@ -11,7 +11,7 @@ block content
                 div="Delete"
             div(class="table-contents")
                     each article in articles
-                        div(class="article row")
+                        div(class="item row")
                             div
                                 h2=article.title
                             div

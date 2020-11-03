@@ -11,22 +11,19 @@ var mongoose = require('mongoose');
 const config = require('./config/config.json');
 
 // Mongoose setup
-mongoose.connect(config.databaseUri, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(config.databaseUri, {
+  useNewUrlParser: true, 
+  useUnifiedTopology: true, 
+  useCreateIndex: true
+});
 mongoose.set('debug', false);
 require('./models/users');
 require('./models/articles');
+require('./models/pages');
+require('./models/nav-items');
 require('./auth/passport');
 
 mongoose.promise = global.Promise;
-
-// Front of site routes
-var blogRouter = require('./routes/blog');
-var aboutRouter = require('./routes/about');
-
-// Admin routes
-var apiIndexRouter = require('./routes/admin/index');
-var apiBlogRouter = require('./routes/admin/articles');
-var apiUploadsRouter = require('./routes/admin/uploads');
 
 var app = express();
 
@@ -53,11 +50,15 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', blogRouter);
-app.use('/admin', apiIndexRouter);
-app.use('/admin/articles', apiBlogRouter);
-app.use('/about', aboutRouter);
-app.use('/admin/uploads', apiUploadsRouter);
+// Admin routes
+app.use('/admin', require('./routes/admin/index'));
+app.use('/admin/articles', require('./routes/admin/articles'));
+app.use('/admin/uploads', require('./routes/admin/uploads'));
+app.use('/admin/pages', require('./routes/admin/pages'));
+app.use('/admin/navigation', require('./routes/admin/navigation'));
+
+// Front routes
+app.use('/', require('./routes/index'));
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

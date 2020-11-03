@@ -1,7 +1,9 @@
 # Simple NodeJS Blog with a CMS
-A simple blog developed using MVC and MongoDB. Json web tokens are utilized for authentication. Currently the CMS can only be used to manage blog articles and upload images. Page creation is planned.
+A simple blog developed using MVC and MongoDB. Json web tokens are utilized for authentication.
 
 Articles are saved and edited in markdown (.md) and are converted to html when served in the browser!
+
+Static pages can be added, along with the ability to append links to the navigation.
 
 ## Built With
 - Express.js - Web framework

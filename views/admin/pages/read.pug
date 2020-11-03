@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    a(class="create-btn" href='/admin/pages/create') Create Page
+    if (pages.length)
+        div(class="table items")
+            div(class="row")
+                div="Title"
+                div="Date"
+                div="Edit"
+                div="Delete"
+            div(class="table-contents")
+                    each page in pages
+                        div(class="item row")
+                            div
+                                h2=page.title
+                            div
+                                time!= moment(page.date).format("M/D/Y hh:mm")
+                            div
+                                a(href="pages/edit/" + page.id) Edit
+                            div
+                                a(href="pages/delete/" + page.id) Delete

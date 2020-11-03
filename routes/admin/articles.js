@@ -6,7 +6,7 @@ const articles = require('../../controllers/admin/articles');
 router.get('/', auth.required, articles.read);
 
 router.get('/create', auth.required, function (req, res, next) {
-  res.render('admin/articles/createArticle', {title: 'Create Article'});
+  res.render('admin/articles/create', {title: 'Create Article'});
 });
 router.post('/create', auth.required, articles.create);
 router.get('/edit/:id', auth.required, articles.edit);

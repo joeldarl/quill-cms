@@ -10,7 +10,7 @@
 
 body {
   padding: 20px;
-  font: 14px "Consolas", Helvetica, Arial, sans-serif;
+  font: 14px Consolas, Helvetica, Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased; }
   body .wrap {
@@ -38,7 +38,6 @@ time {
   margin-bottom: 20px; }
 
 article {
-  margin-top: 20px;
   margin-bottom: 60px; }
   article img {
     width: 100%; }

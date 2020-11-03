@@ -1,10 +1,7 @@
-var express = require('express');
 const mongoose = require('mongoose');
-var ObjectID = require('mongodb').ObjectID;
 const articles = mongoose.model('articles');
 const showdown = require('showdown');
 const moment = require('moment');
-const config = require('../../config/config.json');
 
 exports.create = (req, res, next) => {
     const article = req.body;
@@ -38,11 +35,7 @@ exports.read = (req, res, next) => {
             return res.sendStatus(400);
         }
         else {
-            var converter = new showdown.Converter();
-            Object.keys(all).forEach(function(article){
-                all[article].body= converter.makeHtml(all[article].body);
-            });
-            res.render('admin/articles', {articles: all, title: 'Articles', moment: moment})
+            res.render('admin/articles/read', {articles: all, title: 'Articles', moment: moment})
         }
     });
 };

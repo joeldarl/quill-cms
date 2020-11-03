@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    a(class="create-btn" href='/admin/navigation/create') Create Navigation Item
+    if (navItems.length)
+        div(class="table items")
+            div(class="row")
+                div="Title"
+                div="Date"
+                div="Edit"
+                div="Delete"
+            div(class="table-contents")
+                    each navItem in navItems
+                        div(class="item row")
+                            div
+                                h2=navItem.title
+                            div
+                                h2=navItem.url
+                            div
+                                a(href="pages/edit/" + navItem.id) Edit
+                            div
+                                a(href="pages/delete/" + navItem.id) Delete
