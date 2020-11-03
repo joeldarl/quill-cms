@@ -14,6 +14,10 @@ exports.read = async (req, res) => {
         if(!page) {
             throw 'Page not found.';
         }
+
+        var converter = new showdown.Converter();
+        page.body= converter.makeHtml(page.body);
+        
         res.render('pages', {page, title: config.title, navigation: navItems});
     } catch (err) {
         res.sendStatus(404);
