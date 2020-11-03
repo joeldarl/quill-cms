@@ -152,22 +152,42 @@ nav {
     margin-top: 10px; }
   .admin-body .editor-toolbar {
     opacity: 1; }
-  .admin-body .uploads-form input[type="file"] {
-    border: none;
-    display: block; }
-  .admin-body .upload-image-wrap {
-    position: relative;
-    margin: 10px;
+  .admin-body .uploads-form {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: inline-block; }
+    .admin-body .uploads-form input[type="file"] {
+      border: none;
+      display: block;
+      padding: 0px; }
+  .admin-body .images-container {
+    display: block;
+    border: 1px solid black; }
+  .admin-body .image-item {
     display: inline-block;
-    width: 108px; }
-    .admin-body .upload-image-wrap .thumbnail {
+    margin: 10px;
+    width: 100px; }
+    .admin-body .image-item .image-wrap {
+      position: relative;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      box-sizing: border-box;
+      overflow: hidden; }
+    .admin-body .image-item img {
       border: none;
       clip: rect(0px 100px 100px 0px);
       height: 100px;
-      position: absolute; }
-    .admin-body .upload-image-wrap input {
-      float: left;
-      width: 100px;
-      margin-top: 100px; }
+      position: absolute;
+      box-sizing: border-box; }
+    .admin-body .image-item input {
+      width: 100%;
+      margin-top: 5px;
+      box-sizing: border-box; }
+    .admin-body .image-item input[type="text"] {
+      padding: 0px;
+      margin-bottom: 5px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -4,7 +4,11 @@ block content
     form(class="uploads-form" method="post" enctype="multipart/form-data" action="/admin/uploads")
         input(type="file" name="file")
         input(type="submit" value="submit")
-    each file in files
-        div(class="upload-image-wrap")
-            image(class="thumbnail" src=file)
-            input(type="text" readonly value=file)
+    div(class="images-container")
+        each file in files
+            div(class="image-item")
+                div(class="image-wrap")
+                    image(src=file)
+                form(method="post" action="/admin/uploads/delete")
+                    input(type="text" name="file" readonly value=file)
+                    input(type="submit" value="delete")

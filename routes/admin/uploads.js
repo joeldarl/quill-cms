@@ -40,5 +40,6 @@ var upload = multer({
 // Upload routes
 router.get('/', auth.required, uploads.getUploads);
 router.post('/', auth.required, upload.single('file'), uploads.upload);
+router.post('/delete', auth.required, uploads.delete);
 
 module.exports = router;
