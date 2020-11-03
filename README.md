@@ -5,7 +5,7 @@ Articles are saved and edited in markdown (.md) and are converted to html when s
 
 Static pages can be added, along with the ability to append links to the navigation.
 
-## Built With
+## Built with
 - Express.js - Web framework
 - Mongoose - MongoDB ODM
 - Passport - Authentication middleware
@@ -20,3 +20,7 @@ Static pages can be added, along with the ability to append links to the navigat
 4. To log in and access the admin interface in your browser, go to /admin/login.
 
 You can edit the config files manually within the config folder if you choose to do so.
+
+## Plans for future updates
+
+Article pagination and archive functionality will be added. At some point, custom post types will probably be added to replace articles.

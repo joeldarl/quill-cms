@@ -1,18 +1,24 @@
+const fse = require('fs-extra');
 const router = require('express').Router();
 const auth = require('../../auth/auth');
 const uploads = require('../../controllers/admin/uploads');
 const multer = require('multer');
 const path = require('path');
+const moment = require('moment');
 
 // SET STORAGE for uploads
 var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/uploads')
+    destination: async function (req, file, cb) {
+        let date = new Date();
+        date = moment(date);
+        let path = 'public/uploads/' + date.year() + '/' + parseInt(date.month() + 1);
+        await fse.ensureDir(path);
+        cb(null, path)
     },
     filename: function (req, file, cb) {
         let extArray = file.mimetype.split("/");
         let extension = extArray[extArray.length - 1];
-        cb(null, file.fieldname + '-' + Date.now()+ '.' +extension)
+        cb(null, file.originalname);
     }
 });
 
@@ -29,7 +35,7 @@ var upload = multer({
     limits:{
         fileSize: 1024 * 1024
     }
-})
+});
 
 // Upload routes
 router.get('/', auth.required, uploads.getUploads);

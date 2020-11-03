@@ -8,19 +8,13 @@ exports.login = (req, res, next) => {
     const user = req.body;
 
     if(!user.email) {
-        return res.status(422).json({
-            errors: {
-                email: 'is required',
-            },
-        });
+        req.flash('info', 'Email is required.');
+        return res.redirect('/admin/login');
     }
 
     if(!user.password) {
-        return res.status(422).json({
-            errors: {
-                password: 'is required',
-            },
-        });
+        req.flash('info', 'Password is required.');
+        return res.redirect('/admin/login');
     }
 
     passport.authenticate('login', {session: false, failureFlash: true}, function(err, user, info) {
