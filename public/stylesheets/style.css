@@ -63,7 +63,6 @@ nav {
     margin: 0 0 30px;
     font: 1.5em Roboto; }
   .admin-body a {
-    font: 1em Roboto;
     text-decoration: none; }
   .admin-body input {
     height: 30px;
@@ -71,9 +70,13 @@ nav {
     padding: 5px; }
   .admin-body nav {
     padding: 20px; }
+    .admin-body nav a {
+      font: 1em Roboto; }
+  .admin-body input[type="text"] {
+    margin-left: 20px; }
   .admin-body .table {
     width: 100%; }
-    .admin-body .table h2, .admin-body .table time {
+    .admin-body .table h2, .admin-body .table time, .admin-body .table a {
       font: 1em Roboto;
       margin: 0; }
     .admin-body .table .table-contents {
@@ -86,6 +89,8 @@ nav {
         border-bottom: 1px solid grey; }
       .admin-body .table .row div {
         flex: 1; }
+  .admin-body .create-btn {
+    font: 1em Roboto; }
   .admin-body .flash-message {
     position: fixed;
     left: 50%;
@@ -188,6 +193,7 @@ nav {
       box-sizing: border-box; }
     .admin-body .image-item input[type="text"] {
       padding: 0px;
+      margin-left: 0px;
       margin-bottom: 5px; }
 
 /*# sourceMappingURL=style.css.map */
