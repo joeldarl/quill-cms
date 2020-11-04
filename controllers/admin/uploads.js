@@ -22,6 +22,7 @@ exports.getUploads = async (req, res, next) => {
 
     for(var i = 0; i < files.length; i++){
         files[i] = files[i].replace("public", "");
+        files[i] = files[i].replace(/\\/g, "/");
     }
     res.render('admin/uploads', {files: files, title: 'Uploads'});
 };

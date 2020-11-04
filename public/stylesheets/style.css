@@ -40,7 +40,10 @@ time {
 article {
   margin-bottom: 60px; }
   article img {
-    width: 100%; }
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    width: 320px; }
 
 nav {
   padding: 20px 0px; }
