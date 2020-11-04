@@ -3,7 +3,7 @@ extends ./layout
 block content
     body
         h2= "Register"
-        form(action="/admin/create" method="POST")
+        form(action="/admin/users/create" method="POST")
             p Email:
                 input(type="text" name="email" placeholder="")
             p Password:

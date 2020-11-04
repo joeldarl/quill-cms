@@ -70,7 +70,7 @@ exports.update = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    return navItems.deleteOne(req.body.id).then((navItem) => {
+    return navItems.deleteOne({_id: req.params.id}).then((navItem) => {
         if(!navItem) {
             return res.sendStatus(400);
         }

@@ -70,7 +70,7 @@ exports.update = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    return pages.deleteOne(req.body.id).then((page) => {
+    return pages.deleteOne({_id: req.params.id}).then((page) => {
         if(!page) {
             return res.sendStatus(400);
         }

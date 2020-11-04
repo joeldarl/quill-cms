@@ -68,7 +68,7 @@ exports.update = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    return articles.deleteOne(req.body.id).then((article) => {
+    return articles.deleteOne({_id: req.params.id}).then((article) => {
         if(!article) {
             return res.sendStatus(400);
         }

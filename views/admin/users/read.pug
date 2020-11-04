@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    a(class="create-btn" href='/admin/register') Register User
+    if (users.length)
+        div(class="table items")
+            div(class="row")
+                div="Email"
+                div="ID"
+                div="Delete"
+            div(class="table-contents")
+                    each user in users
+                        div(class="item row")
+                            div
+                                h2=user.email
+                            div
+                                h2=user.id
+                            div
+                                a(href="users/delete/" + user.id) Delete

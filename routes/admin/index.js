@@ -14,13 +14,17 @@ router.get('/login', auth.optional, function (req, res, next){
 router.post('/login', auth.optional, users.login);
 router.get('/logout', auth.optional, users.logout);
 
+//GET current user route (for testing)
+router.get('/current', auth.required, users.current);
+
 // Register user routes
 router.get('/register', auth.required, function (req, res, next){
     res.render('admin/register');
 });
-router.post('/create', auth.required, users.create);
 
-//GET current user route (for testing)
-router.get('/current', auth.required, users.current);
+// User management routes
+router.post('/users/create', auth.required, users.create);
+router.get('/users', auth.required, users.read);
+router.get('/users/delete/:id', auth.required, users.delete);
 
 module.exports = router;

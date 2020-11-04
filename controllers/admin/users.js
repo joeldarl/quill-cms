@@ -68,9 +68,32 @@ exports.create = (req, res, next) => {
     return finalUser.save()
         .then(() => {
             req.flash('info', 'User created.');
-            res.redirect('/admin/');
+            res.redirect('/admin/users');
         });
 };
+
+exports.read = (req, res) => {
+    return users.find().then((all) => {
+        if(!all) {
+            return res.sendStatus(400);
+        }
+        else {
+            res.render('admin/users/read', {users: all, title: 'Users'})
+        }
+    });
+};
+
+exports.delete = (req, res) => {
+        return users.deleteOne({_id: req.params.id}).then((user) => {
+        if(!user) {
+            return res.sendStatus(400);
+        }
+        else {
+            req.flash('info', 'User deleted.');
+            res.redirect('/admin/users');
+        }
+    });
+}
 
 exports.current = (req, res, next) => {
     const { payload: { id } } = req;
