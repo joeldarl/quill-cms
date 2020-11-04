@@ -2,30 +2,51 @@ const mongoose = require('mongoose');
 const pages = mongoose.model('pages');
 const showdown = require('showdown');
 const moment = require('moment');
+const e = require('express');
 
-exports.create = (req, res, next) => {
+exports.create = async (req, res, next) => {
     const page = req.body;
+    const error = [];
 
     if (!page.title) {
-        return res.status(422).json({
-            errors: {
-                title: 'is required',
-            },
-        });
+        res.status(422);
+        error.push('Title is required');
+    }
+
+    if (!page.url) {
+        res.status(422);
+        error.push('Url is required');
+    } else {
+        // await pages.find({url: req.body.url}, (pageConflict) => {
+        //     if(pageConflict) {
+        //         res.status(422);
+        //         error.push('Url is already taken');
+        //     }
+        // });
     }
 
     if (!page.body) {
-        return res.status(422).json({
-            errors: {
-                text: 'is required',
-            },
-        });
+        res.status(422);
+        error.push('Body text is required');
+    }
+
+    if(error.length) {
+        req.flash('info', error.join(", "))
+        return res.redirect('/admin/pages');
     }
 
     const newPage = new pages(page);
 
-    return newPage.save().then(() => {
-        req.flash('info', 'Page created.');
+    return newPage.save((err, page) => {
+        if(err) {
+            if (err.name === 'MongoError' && err.code === 11000) {
+                req.flash('info', 'Url already exists!');
+            } else {
+                req.flash('info', 'Something has gone wrong, cannot save page!');
+            }
+            return res.redirect('/admin/pages');
+        }
+        req.flash('info', 'Page created');
         res.redirect('/admin/pages')
     });
 };
@@ -63,7 +84,7 @@ exports.update = (req, res, next) => {
             page.url = pageUpdated.url;
             page.body = pageUpdated.body;
             page.save();
-            req.flash('info', 'Page updated.');
+            req.flash('info', 'Page updated');
             res.redirect('/admin/pages');
         }
     });
@@ -75,7 +96,7 @@ exports.delete = (req, res, next) => {
             return res.sendStatus(400);
         }
         else {
-            req.flash('info', 'Page deleted.');
+            req.flash('info', 'Page deleted');
             res.redirect('/admin/pages');
         }
     });

@@ -24,7 +24,7 @@ exports.create = (req, res, next) => {
 
     const newArticle = new articles(article);
     return newArticle.save().then(() => {
-        req.flash('info', 'Article created.');
+        req.flash('info', 'Article created');
         res.redirect('/admin/articles')
     });
 };
@@ -61,7 +61,7 @@ exports.update = (req, res, next) => {
             article.title = articleUpdated.title;
             article.body = articleUpdated.body;
             article.save();
-            req.flash('info', 'Article updated.');
+            req.flash('info', 'Article updated');
             res.redirect('/admin/articles');
         }
     });
@@ -73,7 +73,7 @@ exports.delete = (req, res, next) => {
             return res.sendStatus(400);
         }
         else {
-            req.flash('info', 'Article deleted.');
+            req.flash('info', 'Article deleted');
             res.redirect('/admin/articles');
         }
     });

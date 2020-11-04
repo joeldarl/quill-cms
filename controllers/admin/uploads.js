@@ -9,7 +9,7 @@ exports.upload = (req, res, next) => {
         error.httpStatusCode = 400;
         return next(error);
     }
-    req.flash('info', 'Image uploaded successfully.');
+    req.flash('info', 'Image uploaded successfully');
     return res.redirect('/admin/uploads');
 };
 
@@ -30,7 +30,7 @@ exports.getUploads = async (req, res, next) => {
 exports.delete = (req, res, next) => {
     var file = req.body.file;
     fse.unlink('public' + file);
-    req.flash('info', 'File deleted.');
+    req.flash('info', 'File deleted');
     res.redirect('/admin/uploads');
 }
 

@@ -63,7 +63,7 @@ exports.update = (req, res, next) => {
             navItem.url = navItemUpdated.url;
             navItem.body = navItemUpdated.body;
             navItem.save();
-            req.flash('info', 'Navigation item updated.');
+            req.flash('info', 'Navigation item updated');
             res.redirect('/admin/navigation');
         }
     });
@@ -75,7 +75,7 @@ exports.delete = (req, res, next) => {
             return res.sendStatus(400);
         }
         else {
-            req.flash('info', 'Navigation item deleted.');
+            req.flash('info', 'Navigation item deleted');
             res.redirect('/admin/navigation');
         }
     });

@@ -8,12 +8,12 @@ exports.login = (req, res, next) => {
     const user = req.body;
 
     if(!user.email) {
-        req.flash('info', 'Email is required.');
+        req.flash('info', 'Email is required');
         return res.redirect('/admin/login');
     }
 
     if(!user.password) {
-        req.flash('info', 'Password is required.');
+        req.flash('info', 'Password is required');
         return res.redirect('/admin/login');
     }
 
@@ -67,7 +67,7 @@ exports.create = (req, res, next) => {
 
     return finalUser.save()
         .then(() => {
-            req.flash('info', 'User created.');
+            req.flash('info', 'User created');
             res.redirect('/admin/users');
         });
 };
@@ -89,7 +89,7 @@ exports.delete = (req, res) => {
             return res.sendStatus(400);
         }
         else {
-            req.flash('info', 'User deleted.');
+            req.flash('info', 'User deleted');
             res.redirect('/admin/users');
         }
     });
