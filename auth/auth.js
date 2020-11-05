@@ -15,8 +15,8 @@ const auth = {
         secret: jwtSecret.secret,
         userProperty: 'payload',
         algorithms: ['HS256'],
-        getToken: function test(req) {
-            if(req.cookies)
+        getToken: (req) => {
+            if(req.cookies.auth)
             {
                 return req.cookies.auth;
             }

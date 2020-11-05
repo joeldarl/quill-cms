@@ -16,13 +16,6 @@ exports.create = async (req, res, next) => {
     if (!page.url) {
         res.status(422);
         error.push('Url is required');
-    } else {
-        // await pages.find({url: req.body.url}, (pageConflict) => {
-        //     if(pageConflict) {
-        //         res.status(422);
-        //         error.push('Url is already taken');
-        //     }
-        // });
     }
 
     if (!page.body) {
@@ -75,7 +68,7 @@ exports.edit = async (req, res, next) => {
 exports.update = (req, res, next) => {
     return pages.findOne({ _id: req.params.id }).then((page) => {
         const pageUpdated = req.body;
-
+        
         if(!page) {
             return res.sendStatus(400);
         }

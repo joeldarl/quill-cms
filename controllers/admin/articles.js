@@ -3,7 +3,7 @@ const articles = mongoose.model('articles');
 const showdown = require('showdown');
 const moment = require('moment');
 
-exports.create = (req, res, next) => {
+exports.create = (req, res) => {
     const article = req.body;
 
     if (!article.title) {
@@ -29,7 +29,7 @@ exports.create = (req, res, next) => {
     });
 };
 
-exports.read = (req, res, next) => {
+exports.read = (req, res) => {
     return articles.find().then((all) => {
         if(!all) {
             return res.sendStatus(400);
@@ -40,7 +40,7 @@ exports.read = (req, res, next) => {
     });
 };
 
-exports.edit = async (req, res, next) => {
+exports.edit = async (req, res) => {
     try {
         const article = await articles.findOne({ _id: req.params.id });
         res.render('admin/articles/edit', {article, title: 'Edit Article'});
@@ -50,7 +50,7 @@ exports.edit = async (req, res, next) => {
     }
 };
 
-exports.update = (req, res, next) => {
+exports.update = (req, res) => {
     return articles.findOne({ _id: req.params.id }).then((article) => {
         const articleUpdated = req.body;
 
@@ -67,7 +67,7 @@ exports.update = (req, res, next) => {
     });
 };
 
-exports.delete = (req, res, next) => {
+exports.delete = (req, res) => {
     return articles.deleteOne({_id: req.params.id}).then((article) => {
         if(!article) {
             return res.sendStatus(400);

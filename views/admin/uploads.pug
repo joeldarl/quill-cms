@@ -5,10 +5,11 @@ block content
         input(type="file" name="file")
         input(type="submit" value="submit")
     div(class="images-container")
-        each file in files
+        each file, index in files
             div(class="image-item")
                 div(class="image-wrap")
                     image(src=file)
                 form(method="post" action="/admin/uploads/delete")
-                    input(type="text" name="file" readonly value=file)
+                    input(id="url-field"+index type="text" name="file" readonly value=file)
+                    a(class="copy-btn" onclick="copyUrl('url-field"+index+"')")="copy url"
                     input(type="submit" value="delete")
