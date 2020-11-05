@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const users = mongoose.model('users');
 const path = require('path');
-var fs = require('fs');
+const fs = require('fs');
+const secret = require('../../config/secret.json');
 
 exports.login = (req, res, next) => {
     const user = req.body;
@@ -20,7 +22,7 @@ exports.login = (req, res, next) => {
     passport.authenticate('login', {session: false, failureFlash: true}, function(err, user, info) {
         if (err) { return next(err); }
 
-        // If no user is returned, authetication has failed
+        // If no user is returned, authentication has failed
         if (!user) {
             req.flash('info', info.message);
             return res.redirect('/admin/login');
@@ -32,13 +34,13 @@ exports.login = (req, res, next) => {
         // The cookie expires after 8 hours
         res.cookie('auth', user.token, {expires: new Date(Date.now() + 8 * 3600000)});
         req.flash('info', info.message);
-        res.redirect('/admin');
+        return res.redirect('/admin');
     })(req, res, next);
 };
 
 exports.logout = (req, res, next) => {
     res.clearCookie('auth');
-    res.redirect('/admin/login');
+    return res.redirect('/admin/login');
 };
 
 // Creating a new user
@@ -78,19 +80,31 @@ exports.read = (req, res) => {
             return res.sendStatus(400);
         }
         else {
-            res.render('admin/users/read', {users: all, title: 'Users'})
+            return res.render('admin/users/read', {users: all, title: 'Users'})
         }
     });
 };
 
 exports.delete = (req, res) => {
-        return users.deleteOne({_id: req.params.id}).then((user) => {
+    if(!req.cookies.auth)
+    {
+        return res.sendStatus(400);
+    }
+
+    let user = jwt.decode(req.cookies.auth, secret.secret);
+
+    if (user.id == req.params.id) {
+        req.flash('info', 'You cannot delete the user you are logged in as');
+        return res.redirect('/admin/users');
+    }
+
+    return users.deleteOne({_id: req.params.id}).then((user) => {
         if(!user) {
             return res.sendStatus(400);
         }
         else {
             req.flash('info', 'User deleted');
-            res.redirect('/admin/users');
+            return res.redirect('/admin/users');
         }
     });
 }

@@ -12,7 +12,7 @@ router.get('/login', auth.optional, function (req, res, next){
     res.render('admin/login');
 });
 router.post('/login', auth.optional, users.login);
-router.get('/logout', auth.optional, users.logout);
+router.get('/logout', auth.required, users.logout);
 
 //GET current user route (for testing)
 router.get('/current', auth.required, users.current);
