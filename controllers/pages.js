@@ -7,7 +7,7 @@ var url = require('url');
 const config = require('../config/config.json');
 
 exports.read = async (req, res) => {
-    var navItems = await navigation.find();
+    var navItems = await navigation.find().sort('order');
 
     try {
         const page = await pages.findOne({ url: req.originalUrl });

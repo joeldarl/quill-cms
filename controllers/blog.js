@@ -7,7 +7,7 @@ const moment = require('moment');
 const config = require('../config/config.json');
 
 exports.read = async (req, res, next) => {
-    var navItems = await navigation.find();
+    var navItems = await navigation.find().sort('order');
 
     return articles.find().then((all) => {
         if(!all) {
