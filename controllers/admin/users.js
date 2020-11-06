@@ -2,11 +2,9 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const users = mongoose.model('users');
-const path = require('path');
-const fs = require('fs');
 const secret = require('../../config/secret.json');
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
     const user = req.body;
 
     if(!user.email) {
@@ -38,13 +36,13 @@ exports.login = (req, res, next) => {
     })(req, res, next);
 };
 
-exports.logout = (req, res, next) => {
+exports.logout = (req, res) => {
     res.clearCookie('auth');
     return res.redirect('/admin/login');
 };
 
 // Creating a new user
-exports.create = (req, res, next) => {
+exports.create = (req, res) => {
     const user = req.body;
 
     if (!user.email) {
@@ -109,7 +107,7 @@ exports.delete = (req, res) => {
     });
 }
 
-exports.current = (req, res, next) => {
+exports.current = (req, res) => {
     const { payload: { id } } = req;
 
     return users.findById(id)

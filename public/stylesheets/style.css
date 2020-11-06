@@ -66,7 +66,8 @@ nav {
     margin: 0 0 30px;
     font: 1.5em Roboto; }
   .admin-body a {
-    text-decoration: none; }
+    text-decoration: none;
+    cursor: pointer; }
   .admin-body input {
     font-size: 1em;
     height: 30px;
@@ -76,21 +77,30 @@ nav {
     padding: 20px; }
     .admin-body nav a {
       font: 1em Roboto; }
+  .admin-body input[type="submit"] {
+    cursor: pointer; }
   .admin-body input[type="text"] {
     margin-left: 20px; }
+  .admin-body .btn {
+    border: 1px solid black;
+    background-color: #efefef;
+    font-size: 1em;
+    font-family: 'Roboto';
+    padding: 5px;
+    display: inline-block; }
   .admin-body .table {
     width: 100%; }
     .admin-body .table h2, .admin-body .table time, .admin-body .table a {
-      font: 1em Roboto;
+      font: 1em Roboto; }
+    .admin-body .table h2, .admin-body .table time {
       margin: 0; }
     .admin-body .table .table-contents {
       border: 1px solid black; }
     .admin-body .table .row {
       padding: 20px;
       display: flex;
-      flex-flow: row wrap; }
-      .admin-body .table .row:not(:first-child) {
-        border-top: 1px solid grey; }
+      flex-flow: row wrap;
+      cursor: move; }
       .admin-body .table .row div {
         flex: 1; }
   .admin-body .create-btn {
@@ -161,6 +171,8 @@ nav {
     margin-top: 10px; }
   .admin-body .editor-toolbar {
     opacity: 1; }
+  .admin-body .sort-save-btn {
+    margin-top: 10px; }
   .admin-body .uploads-form {
     border: 1px solid black;
     padding: 10px;
@@ -171,13 +183,8 @@ nav {
       display: block;
       padding: 0px; }
   .admin-body .copy-btn {
-    border: 1px solid black;
-    background-color: #efefef;
-    font-size: 1em;
-    font-family: 'Roboto';
     display: block;
-    text-align: center;
-    padding: 5px; }
+    text-align: center; }
   .admin-body .images-container {
     display: block;
     border: 1px solid black; }

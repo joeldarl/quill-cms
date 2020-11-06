@@ -1,4 +1,4 @@
-# NodeJS CMS with blog
+# NodeJS CMS
 A CMS developed using NodeJS and MongoDB. It supports blog functionality.
 
 Static pages can be added, along with the ability to append links to the navigation.
@@ -6,7 +6,7 @@ Static pages can be added, along with the ability to append links to the navigat
 ## Features
 - Json web token authentication
 - Edit static pages
-- Navigation management
+- Drag and drop navigation management
 - Markdown(.md) support
 
 ## Built with

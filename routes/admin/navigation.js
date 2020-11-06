@@ -11,6 +11,7 @@ router.get('/create', auth.required, function (req, res, next) {
 router.post('/create', auth.required, navigation.create);
 router.get('/edit/:id', auth.required, navigation.edit);
 router.post('/update/:id', auth.required, navigation.update);
+router.post('/orderUpdate', auth.required, navigation.orderUpdate)
 router.get('/delete/:id', auth.required, navigation.delete);
 
 module.exports = router;

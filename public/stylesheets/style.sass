@@ -69,8 +69,9 @@ nav
     font: 1.5em Roboto
   a
     text-decoration: none
+    cursor: pointer
   input
-    font-size: 1em;
+    font-size: 1em
     height: 30px
     border: 1px solid black
     padding: 5px
@@ -78,12 +79,22 @@ nav
     padding: 20px
     a
       font: 1em Roboto
+  input[type="submit"]
+    cursor: pointer
   input[type="text"]
     margin-left: 20px
+  .btn
+    border: 1px solid black
+    background-color: #efefef
+    font-size: 1em
+    font-family: 'Roboto'
+    padding: 5px
+    display: inline-block
   .table
     width: 100%
     h2, time, a
       font: 1em Roboto
+    h2, time
       margin: 0
     .table-contents
       border: 1px solid black
@@ -91,8 +102,9 @@ nav
       padding: 20px
       display: flex
       flex-flow: row wrap
+      cursor: move
       &:not(:first-child)
-        border-top: 1px solid grey
+        // border-top: 1px solid grey
       div
         flex: 1
   .create-btn
@@ -175,6 +187,10 @@ nav
   .editor-toolbar
     opacity: 1
 
+  // Navigation page
+  .sort-save-btn
+    margin-top: 10px
+
   // Uploads page
   .uploads-form
     border: 1px solid black
@@ -187,13 +203,8 @@ nav
       padding: 0px
 
   .copy-btn
-    border: 1px solid black;
-    background-color: #efefef;
-    font-size: 1em;
-    font-family: 'Roboto';
     display: block;
     text-align: center;
-    padding: 5px;
 
   .images-container
     display: block
