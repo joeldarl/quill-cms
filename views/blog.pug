@@ -6,3 +6,6 @@ block content
             h2= article.title
             time!= moment(article.date).format("MMMM D, Y h:mm A")
             div!= article.body
+    div.pagination
+        each val, i in Array(pageCount)
+            a(href="/?page="+ (i+1))="["+(i+1)+"]"

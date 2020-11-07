@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const users = mongoose.model('users');
 const secret = require('../../config/secret.json');
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
     const user = req.body;
 
     if(!user.email) {

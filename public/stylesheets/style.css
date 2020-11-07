@@ -60,6 +60,11 @@ nav {
         text-align: center;
         text-decoration: none; }
 
+.pagination {
+  float: right; }
+  .pagination a {
+    text-decoration: none; }
+
 .admin-body {
   font: 1em Roboto; }
   .admin-body h1 {
