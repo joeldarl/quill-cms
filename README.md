@@ -26,7 +26,6 @@ Static pages can be added, along with the ability to append links to the navigat
 You can edit the config files manually within the config folder if you choose to do so.
 
 ## Planned future features
-- Article pagination
 - Draft saving and preview
 - Password reset via email
 - Post archive
