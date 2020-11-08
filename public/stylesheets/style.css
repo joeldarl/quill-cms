@@ -65,6 +65,11 @@ nav {
   .pagination a {
     text-decoration: none; }
 
+.hidden {
+  visibility: hidden;
+  height: 0 !important;
+  padding: 0 !important; }
+
 .admin-body {
   font: 1em Roboto; }
   .admin-body h1 {
@@ -101,13 +106,16 @@ nav {
       margin: 0; }
     .admin-body .table .table-contents {
       border: 1px solid black; }
+    .admin-body .table .sortable {
+      cursor: move; }
     .admin-body .table .row {
       padding: 20px;
       display: flex;
-      flex-flow: row wrap;
-      cursor: move; }
+      flex-flow: row wrap; }
       .admin-body .table .row div {
         flex: 1; }
+    .admin-body .table input {
+      margin-left: 0; }
   .admin-body .create-btn {
     font: 1em Roboto; }
   .admin-body .flash-message {

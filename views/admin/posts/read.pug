@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    a(class="create-btn" href='/admin/posts/create') Create post
+    if (posts.length)
+        div(class="table items")
+            div(class="row")
+                div="Title"
+                div="Date"
+                div="Edit"
+                div="Delete"
+            div(class="table-contents")
+                    each post in posts
+                        div(class="item row")
+                            div
+                                h2=post.title
+                            div
+                                time!= moment(post.date).format("M/D/Y hh:mm")
+                            div
+                                a(href="posts/edit/" + post.id) Edit
+                            div
+                                a(href="posts/delete/" + post.id) Delete

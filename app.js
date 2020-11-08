@@ -20,6 +20,8 @@ mongoose.set('debug', false);
 require('./models/users');
 require('./models/articles');
 require('./models/pages');
+require('./models/post-types');
+require('./models/posts');
 require('./models/nav-items');
 require('./auth/passport');
 
@@ -53,6 +55,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Admin routes
 app.use('/admin', require('./routes/admin/index'));
 app.use('/admin/articles', require('./routes/admin/articles'));
+app.use('/admin/post-types', require('./routes/admin/post-types'));
+app.use('/admin/posts', require('./routes/admin/posts'));
 app.use('/admin/uploads', require('./routes/admin/uploads'));
 app.use('/admin/pages', require('./routes/admin/pages'));
 app.use('/admin/navigation', require('./routes/admin/navigation'));

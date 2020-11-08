@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+    body
+        form(action="/admin/post-types/update/"+postType.id method="POST")
+            p Title:
+                input(type="text" name="title" value= postType.title)
+            p Url:
+                input(type="text" name="title" value= postType.url)
+            input(type="submit")

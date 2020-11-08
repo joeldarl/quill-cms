@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    a(class="create-btn" href='/admin/post-types/create') Create post type
+    if (postTypes.length)
+        div(class="table items")
+            div(class="row")
+                div="Title"
+                div="Edit"
+                div="Delete"
+            div(class="table-contents")
+                    each postType in postTypes
+                        div(class="item row")
+                            div
+                                h2=postType.title
+                            div
+                                a(href="post-types/edit/" + postType.id) Edit
+                            div
+                                a(href="post-types/delete/" + postType.id) Delete

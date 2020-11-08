@@ -65,6 +65,11 @@ nav
   a
     text-decoration: none
 
+.hidden
+  visibility: hidden
+  height: 0 !important
+  padding: 0 !important
+
 // Admin interface
 .admin-body
   font: 1em Roboto
@@ -102,15 +107,18 @@ nav
       margin: 0
     .table-contents
       border: 1px solid black
+    .sortable
+      cursor: move
     .row
       padding: 20px
       display: flex
       flex-flow: row wrap
-      cursor: move
       &:not(:first-child)
         // border-top: 1px solid grey
       div
         flex: 1
+    input
+      margin-left: 0
   .create-btn
     font: 1em Roboto
   .flash-message

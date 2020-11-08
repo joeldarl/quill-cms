@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+    body
+        form(action="/admin/post-types/create" method="POST")
+            p Title:
+                input(type="text" name="title" placeholder="")
+            br
+            p Url:
+                input(type="text" name="url" placeholder="")
+            br
+            p Fields:
+                    div(class="table items")
+                        div(class="row")
+                            div="Title"
+                            div="Type"
+                            div="Delete"
+                        div(class="table-contents")
+                                    div(class="item row hidden" id="type-template")
+                                        div
+                                            input(type="text" name="title[]")
+                                        div
+                                            select(name="type[]")
+                                                each fieldType in fieldTypes
+                                                    option=fieldType.name
+                                        div
+                                            a(onclick="removeField(this)") Delete
+                    a(class="create-btn" onclick="addField('type-template')") Add field
+            input(type="submit")
+    script.
+        function addField(id) {
+            var templateRow = document.getElementById(id);
+            var parent = templateRow.parentElement;
+            var clone = templateRow.cloneNode(true);
+            clone.classList.remove('hidden');
+            parent.append(clone);
+        }
+
+        function removeField(element) {
+            var row = element.closest('.row');
+            row.remove();
+        }
