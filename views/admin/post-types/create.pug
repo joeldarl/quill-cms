@@ -2,7 +2,7 @@ extends ../layout
 
 block content
     body
-        form(action="/admin/post-types/create" method="POST")
+        form(id ="post-type-form" action="/admin/post-types/create" method="POST")
             p Title:
                 input(type="text" name="title" placeholder="")
             br
@@ -15,28 +15,18 @@ block content
                             div="Title"
                             div="Type"
                             div="Delete"
-                        div(class="table-contents")
-                                    div(class="item row hidden" id="type-template")
-                                        div
-                                            input(type="text" name="title[]")
-                                        div
-                                            select(name="type[]")
-                                                each fieldType in fieldTypes
-                                                    option=fieldType.name
-                                        div
-                                            a(onclick="removeField(this)") Delete
-                    a(class="create-btn" onclick="addField('type-template')") Add field
+                        div(class="table-contents" id="field-table")
+                                    //- div(class="item row" id="type-template")
+                                    //-     div
+                                    //-         input(type="text" name="fields[1][field_name]")
+                                    //-     div
+                                    //-         select(name="fields[1][field_type]")
+                                    //-             each fieldType in fieldTypes
+                                    //-                 option=fieldType.name
+                                    //-     div
+                                    //-         a(onclick="removeField(this)") Delete
+                    a(class="create-btn" onclick="addField('field-table')") Add field
             input(type="submit")
-    script.
-        function addField(id) {
-            var templateRow = document.getElementById(id);
-            var parent = templateRow.parentElement;
-            var clone = templateRow.cloneNode(true);
-            clone.classList.remove('hidden');
-            parent.append(clone);
-        }
-
-        function removeField(element) {
-            var row = element.closest('.row');
-            row.remove();
-        }
+    script(src="/javascripts/field-form.js")
+    script. 
+        fieldform(!{JSON.stringify(fieldTypes)});

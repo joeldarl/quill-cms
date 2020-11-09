@@ -7,9 +7,10 @@ block content
                 input(type="text" name="title" value= post.title)
             br
             p Content:
-            textarea(id="markdown" name="body")
+            textarea(id="post-body" name="body")
             input(type="submit")
     script.
-        window.addEventListener('load', function () {
+        $(document).ready(function(){
+            var simplemde = new SimpleMDE({ element: document.getElementById("post-body") });
             simplemde.value(`#{post.body}`);
         });

@@ -14,7 +14,7 @@ const fieldTypes = [
 ]
 
 exports.createView = async (req, res) => {
-    res.render('admin/post-types/create', {title: 'Create Article', fieldTypes : fieldTypes});
+    res.render('admin/post-types/create', {title: 'Create Post Type', fieldTypes : fieldTypes});
 }
 
 exports.create = async (req, res) => {
@@ -35,7 +35,7 @@ exports.create = async (req, res) => {
             },
         });
     }
-
+    
     const newPostType = new postTypes(postType);
 
     return newPostType.save().then(() => {
@@ -61,7 +61,7 @@ exports.edit = async (req, res) => {
         res.render('admin/post-types/edit', {postType, title: 'Edit Page'});
     } catch {
         res.status(404);
-        res.send({error: "post-types item doesn't exist!"});
+        res.send({error: "Post type doesn't exist!"});
     }
 };
 

@@ -35,7 +35,7 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(session({ 
   secret: crypto.randomBytes(48).toString('hex'), 
   cookie: { maxAge: 60000 }, 
@@ -51,6 +51,7 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Admin routes
 app.use('/admin', require('./routes/admin/index'));
