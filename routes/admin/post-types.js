@@ -2,7 +2,7 @@ const router = require('express').Router();
 const auth = require('../../auth/auth');
 const postTypes = require('../../controllers/admin/post-types');
 
-// post-types routes
+// Post-types routes
 router.get('/', auth.required, postTypes.read);
 
 router.get('/create', auth.required, postTypes.createView);

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const navItems = mongoose.model('nav-items');
-const showdown = require('showdown');
 const moment = require('moment');
 
 exports.create = async (req, res) => {

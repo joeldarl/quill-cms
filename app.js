@@ -17,15 +17,13 @@ mongoose.connect(config.databaseUri, {
   useCreateIndex: true
 });
 mongoose.set('debug', false);
+mongoose.promise = global.Promise;
+
 require('./models/users');
 require('./models/articles');
 require('./models/pages');
-require('./models/post-types');
-require('./models/posts');
 require('./models/nav-items');
 require('./auth/passport');
-
-mongoose.promise = global.Promise;
 
 var app = express();
 
@@ -35,7 +33,7 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(session({ 
   secret: crypto.randomBytes(48).toString('hex'), 
   cookie: { maxAge: 60000 }, 
@@ -52,12 +50,9 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Admin routes
 app.use('/admin', require('./routes/admin/index'));
 app.use('/admin/articles', require('./routes/admin/articles'));
-app.use('/admin/post-types', require('./routes/admin/post-types'));
-app.use('/admin/posts', require('./routes/admin/posts'));
 app.use('/admin/uploads', require('./routes/admin/uploads'));
 app.use('/admin/pages', require('./routes/admin/pages'));
 app.use('/admin/navigation', require('./routes/admin/navigation'));

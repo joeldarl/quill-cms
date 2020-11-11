@@ -4,10 +4,6 @@ const arg = require('arg');
 const fse = require('fs-extra');
 const crypto = require('crypto');
 
-(async () => {
-    
-})();
-
 // Arguments
 const args = arg({
     // Types
@@ -69,7 +65,6 @@ async function config() {
     console.log("Setting up config...");
 
     let configPath = './config/config.json';
-    let configTemplatePath = './config/config-template.json';
 
     await fse.ensureFile(configPath);
 

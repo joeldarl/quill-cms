@@ -1,6 +1,5 @@
 const fse = require('fs-extra');
 const path = require('path');
-const glob = require('glob');
 
 exports.upload = (req, res, next) => {
     const file = req.file;
@@ -13,7 +12,7 @@ exports.upload = (req, res, next) => {
     return res.redirect('/admin/uploads');
 };
 
-exports.getUploads = async (req, res, next) => {
+exports.getUploads = async (req, res) => {
     var files = searchDir('public/uploads');
 
     files = files.filter(function (file){
@@ -27,7 +26,7 @@ exports.getUploads = async (req, res, next) => {
     res.render('admin/uploads', {files: files, title: 'Uploads'});
 };
 
-exports.delete = (req, res, next) => {
+exports.delete = (req, res) => {
     var file = req.body.file;
     fse.unlink('public' + file);
     req.flash('info', 'File deleted');

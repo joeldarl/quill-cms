@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const articles = mongoose.model('articles');
-const showdown = require('showdown');
 const moment = require('moment');
 
 exports.create = (req, res) => {

@@ -5,7 +5,7 @@ const posts = require('../../controllers/admin/posts');
 // posts routes
 router.get('/', auth.required, posts.read);
 
-router.get('/create', auth.required, function (req, res, next) {
+router.get('/create', auth.required, function (req, res) {
   res.render('admin/posts/create', {title: 'Create Article'});
 });
 router.post('/create', auth.required, posts.create);

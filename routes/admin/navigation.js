@@ -5,7 +5,7 @@ const navigation = require('../../controllers/admin/navigation');
 // Pages routes
 router.get('/', auth.required, navigation.read);
 
-router.get('/create', auth.required, function (req, res, next) {
+router.get('/create', auth.required, function (req, res) {
   res.render('admin/navigation/create', {title: 'Create a Navigation Item'});
 });
 router.post('/create', auth.required, navigation.create);

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const pages = mongoose.model('pages');
-const showdown = require('showdown');
 const moment = require('moment');
-const e = require('express');
 
 exports.create = async (req, res, next) => {
     const page = req.body;

@@ -1,4 +1,3 @@
-var express = require('express');
 const mongoose = require('mongoose');
 const articles = mongoose.model('articles');
 const navigation = mongoose.model('nav-items');
@@ -34,5 +33,3 @@ exports.read = async (req, res) => {
         return res.sendStatus(400);
     }
 };
-
-// TODO: Add pagination.

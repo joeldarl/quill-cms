@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const postsSchema = new Schema({
+const PostsSchema = new Schema({
     title: String,
     date: {type: Date, default: Date.now},
     field_data: [Object]
 });
 
-mongoose.model('posts', postsSchema);
+mongoose.model('posts', PostsSchema);
