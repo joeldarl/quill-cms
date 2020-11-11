@@ -58,7 +58,7 @@ exports.read = (req, res) => {
 exports.edit = async (req, res) => {
     try {
         const postType = await postTypes.findOne({ _id: req.params.id });
-        res.render('admin/post-types/edit', {postType, title: 'Edit Page'});
+        res.render('admin/post-types/edit', {postType, fieldTypes : fieldTypes, title: 'Edit Page'});
     } catch {
         res.status(404);
         res.send({error: "Post type doesn't exist!"});

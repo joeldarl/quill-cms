@@ -10,23 +10,27 @@ block content
                 input(type="text" name="url" placeholder="")
             br
             p Fields:
-                    div(class="table items")
+                div(id="repeat")
+                    div(class="table wrapper items")
                         div(class="row")
                             div="Title"
                             div="Type"
                             div="Delete"
-                        div(class="table-contents" id="field-table")
-                                    //- div(class="item row" id="type-template")
-                                    //-     div
-                                    //-         input(type="text" name="fields[1][field_name]")
-                                    //-     div
-                                    //-         select(name="fields[1][field_type]")
-                                    //-             each fieldType in fieldTypes
-                                    //-                 option=fieldType.name
-                                    //-     div
-                                    //-         a(onclick="removeField(this)") Delete
-                    a(class="create-btn" onclick="addField('field-table')") Add field
+                        div(class="table-contents container" id="field-table")
+                            
+                            // Custom fields template
+                            div(class="item template row")
+                                div
+                                    input(type="text" name="fields[{{row-count-placeholder}}][field_name]")
+                                div
+                                    select(name="fields[{{row-count-placeholder}}][field_type]")
+                                        each fieldType in fieldTypes
+                                            option=fieldType.name
+                                div
+                                    a(class="remove") Delete
+                                    
+                        a(class="add") Add field
             input(type="submit")
-    script(src="/javascripts/field-form.js")
+    script(src="/javascripts/repeatable-fields.js")
     script. 
-        fieldform(!{JSON.stringify(fieldTypes)});
+        jQuery("#repeat").repeatable_fields();

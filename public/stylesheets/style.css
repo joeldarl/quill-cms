@@ -144,7 +144,7 @@ nav {
   100% {
     margin-top: 0px;
     opacity: 0; } }
-  .admin-body .container {
+  .admin-body .main-container {
     border: 1px solid black;
     width: 70vw;
     max-width: 800px;
