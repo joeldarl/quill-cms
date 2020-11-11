@@ -1,8 +1,6 @@
 const inquirer = require('inquirer');
 const mongoose = require('mongoose');
 const arg = require('arg');
-const fs = require('fs').promises;
-const fs2 = require('fs');
 const fse = require('fs-extra');
 const crypto = require('crypto');
 
