@@ -1,10 +1,10 @@
 doctype html
 html
-    include ./includes/head.pug
+    include ../includes/head.pug
     body(class="admin-body login")
-        if (messages.info)
+        if (messages && messages.info)
             span(class="flash-message")= messages.info
-        form(action="/admin/login" method="POST")
+        form(action="/admin/users/login" method="POST")
             h1="Login"
             div.form-line
                 p Email:

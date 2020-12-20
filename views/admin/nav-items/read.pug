@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-    a(class="create-btn" href='/admin/navigation/create') Create Navigation Item
+    a(class="create-btn" href='/admin/nav-items/create') Create Navigation Item
     if (navItems.length)
         div(class="table items")
             div(class="row")
@@ -17,7 +17,7 @@ block content
                         div
                             h2=navItem.url
                         div
-                            a(href="navigation/edit/" + navItem.id) Edit
+                            a(href="nav-items/edit/" + navItem.id) Edit
                         div
-                            a(href="navigation/delete/" + navItem.id) Delete
-            a(class="sort-save-btn btn" onclick="saveSort('nav-sort-table', '/admin/navigation/orderUpdate')")="Save order"
+                            a(href="nav-items/delete/" + navItem.id) Delete
+            a(class="sort-save-btn btn" onclick="saveSort('nav-sort-table', '/admin/nav-items/orderUpdate')")="Save order"

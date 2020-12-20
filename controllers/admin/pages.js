@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const pages = mongoose.model('pages');
 const moment = require('moment');
 
-exports.create = async (req, res, next) => {
+exports.create = async (req, res) => {
     const page = req.body;
     const error = [];
 
@@ -42,7 +42,7 @@ exports.create = async (req, res, next) => {
     });
 };
 
-exports.read = (req, res, next) => {
+exports.read = (req, res) => {
     return pages.find().then((all) => {
         if(!all) {
             return res.sendStatus(400);
@@ -53,7 +53,7 @@ exports.read = (req, res, next) => {
     });
 };
 
-exports.edit = async (req, res, next) => {
+exports.edit = async (req, res) => {
     try {
         const page = await pages.findOne({ _id: req.params.id });
         res.render('admin/pages/edit', {page, title: 'Edit Page'});
@@ -63,7 +63,7 @@ exports.edit = async (req, res, next) => {
     }
 };
 
-exports.update = (req, res, next) => {
+exports.update = (req, res) => {
     return pages.findOne({ _id: req.params.id }).then((page) => {
         const pageUpdated = req.body;
         
@@ -81,7 +81,7 @@ exports.update = (req, res, next) => {
     });
 };
 
-exports.delete = (req, res, next) => {
+exports.delete = (req, res) => {
     return pages.deleteOne({_id: req.params.id}).then((page) => {
         if(!page) {
             return res.sendStatus(400);

@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const posts = mongoose.model('posts');
-const showdown = require('showdown');
+const postTypes = mongoose.model('post-types');
 const moment = require('moment');
+
+exports.createView = (req, res) => {
+    const fields = postTypes.find({post_type:req.params.post_type});
+    res.render('admin/posts/create', {postType: req.params.post_type, fields: fields, title: 'Create Post'})
+};
 
 exports.create = (req, res) => {
     const post = req.body;
@@ -10,14 +15,6 @@ exports.create = (req, res) => {
         return res.status(422).json({
             errors: {
                 title: 'is required',
-            },
-        });
-    }
-
-    if (!post.body) {
-        return res.status(422).json({
-            errors: {
-                text: 'is required',
             },
         });
     }
@@ -35,7 +32,7 @@ exports.read = (req, res) => {
             return res.sendStatus(400);
         }
         else {
-            res.render('admin/posts/read', {posts: all, title: 'posts', moment: moment})
+            res.render('admin/posts/read', {posts: all, title: 'Posts', moment: moment})
         }
     });
 };

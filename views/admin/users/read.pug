@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-    a(class="create-btn" href='/admin/register') Register User
+    a(class="create-btn" href='/admin/users/register') Register User
     if (users.length)
         div(class="table items")
             div(class="row")
@@ -16,4 +16,4 @@ block content
                             div
                                 h2=user.id
                             div
-                                a(href="users/delete/" + user.id) Delete
+                                a(href="/admin/users/delete/" + user.id) Delete

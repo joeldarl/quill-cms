@@ -4,11 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var crypto = require('crypto');
 var flash = require('express-flash');
 var sassMiddleware = require('node-sass-middleware');
 var mongoose = require('mongoose');
-const config = require('./config/config.json');
+import Crypto from 'crypto';
+
+require('./models/users');
+require('./models/articles');
+require('./models/pages');
+require('./models/post-types');
+require('./models/posts');
+require('./models/nav-items');
+require('./auth/passport');
 
 // Mongoose setup
 mongoose.connect(config.databaseUri, {
@@ -18,12 +25,6 @@ mongoose.connect(config.databaseUri, {
 });
 mongoose.set('debug', false);
 mongoose.promise = global.Promise;
-
-require('./models/users');
-require('./models/articles');
-require('./models/pages');
-require('./models/nav-items');
-require('./auth/passport');
 
 var app = express();
 
@@ -35,7 +36,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({ 
-  secret: crypto.randomBytes(48).toString('hex'), 
+  secret: Crypto.randomBytes(48).toString('hex'), 
   cookie: { maxAge: 60000 }, 
   resave: false, 
   saveUninitialized: false 
@@ -55,18 +56,20 @@ app.use('/admin', require('./routes/admin/index'));
 app.use('/admin/articles', require('./routes/admin/articles'));
 app.use('/admin/uploads', require('./routes/admin/uploads'));
 app.use('/admin/pages', require('./routes/admin/pages'));
+app.use('/admin/posts', require('./routes/admin/posts'));
+app.use('/admin/post-types', require('./routes/admin/post-types'));
 app.use('/admin/navigation', require('./routes/admin/navigation'));
 
 // Front routes
 app.use('/', require('./routes/index'));
 
 // Catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(req: any, res: any, next: any) {
   next(createError(404));
 });
 
 // Error handler
-app.use(function(err, req, res, next) {
+app.use(function(err:any, req:any, res:any, next:any) {
   // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env').trim() === 'development' ? err : {};

@@ -16,20 +16,6 @@ block content
                             div="Title"
                             div="Type"
                             div="Delete"
-                        div(class="table-contents container" id="field-table")
-                            
-                            // Custom fields template
-                            div(class="item template row")
-                                div
-                                    input(type="text" name="fields[{{row-count-placeholder}}][field_name]")
-                                div
-                                    select(name="fields[{{row-count-placeholder}}][field_type]")
-                                        each fieldType in fieldTypes
-                                            option=fieldType.name
-                                div
-                                    a(class="remove") Delete
-                                    
-                        a(class="add") Add field
             input(type="submit")
     script(src="/javascripts/repeatable-fields.js")
     script. 

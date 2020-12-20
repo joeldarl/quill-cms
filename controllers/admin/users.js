@@ -7,16 +7,6 @@ const secret = require('../../config/secret.json');
 exports.login = (req, res, next) => {
     const user = req.body;
 
-    if(!user.email) {
-        req.flash('info', 'Email is required');
-        return res.redirect('/admin/login');
-    }
-
-    if(!user.password) {
-        req.flash('info', 'Password is required');
-        return res.redirect('/admin/login');
-    }
-
     passport.authenticate('login', {session: false, failureFlash: true}, function(err, user, info) {
         if (err) { return next(err); }
 

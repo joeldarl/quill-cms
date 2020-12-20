@@ -1,7 +1,7 @@
 const jwt = require('express-jwt/lib');
-const jwtSecret = require('../config/secret.json');
+import { Request } from 'express';
 
-const getTokenFromHeaders = (req) => {
+const getTokenFromHeaders = (req : Request) => {
     const { headers: { authorization } } = req;
 
     if(authorization && authorization.split(' ')[0] === 'Token') {
@@ -10,12 +10,14 @@ const getTokenFromHeaders = (req) => {
     return null;
 };
 
+const secret : any = process.env.JWT_SECRET;
+
 const auth = {
     required: jwt({
-        secret: jwtSecret.secret,
+        secret: secret,
         userProperty: 'payload',
         algorithms: ['HS256'],
-        getToken: (req) => {
+        getToken: (req : Request) => {
             if(req.cookies.auth)
             {
                 return req.cookies.auth;
@@ -23,7 +25,7 @@ const auth = {
         }
     }),
     optional: jwt({
-        secret: jwtSecret.secret,
+        secret: secret,
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
         algorithms: ['HS256'],
