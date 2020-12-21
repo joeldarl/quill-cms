@@ -2,25 +2,26 @@ import { inject, injectable } from 'inversify';
 import { IUserModel, IUserRepository } from '../models/Iuser';
 import TYPES from '../constant/types';
 import jwt from 'jsonwebtoken';
+import IUserService from './interfaces/Iuser';
 
 @injectable()
-export default class UserService {
+export default class UserService implements IUserService {
 
   constructor (@inject(TYPES.UserRepository) private userRepository: IUserRepository) {}
 
   public async login(user: IUserModel) {
     let userObject = await this.userRepository.User.findOne({email: user.email});
     
-    if (!userObject){
-      return false;
+    if(!userObject){
+      return userObject;
     }
-    if (!userObject.validatePassword(user.password)) {
-      return false;
+    if (!userObject.validatePassword(user.password)){
+      userObject.token = '';
     }
     else {
       userObject.token = userObject.generateJWT();
-      return userObject;
     }
+    return userObject;
   }
 
   // Creating a new user
@@ -59,7 +60,7 @@ export default class UserService {
     let user = jwt.decode(cookies.auth, secret);
 
     if (user && user.id == id) {
-        return;
+        return {};
     }
 
     return this.userRepository.User.deleteOne({_id: id});

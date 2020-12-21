@@ -1,19 +1,19 @@
 extends ../layout
 
 block content
-    a(class="create-btn" href='/admin/post-types/create') Create post type
-    if (postTypes.length)
+    a(class="create-btn" href='/admin/tags/create') Create tag
+    if (tags.length)
         div(class="table items")
             div(class="row")
                 div="Title"
                 div="Edit"
                 div="Delete"
             div(class="table-contents")
-                    each postType in postTypes
+                    each tag in tags
                         div(class="item row")
                             div
-                                h2=postType.title
+                                h2=tag.title
                             div
-                                a(href="post-types/edit/" + postType.id) Edit
+                                a(href="tags/edit/" + tag.id) Edit
                             div
-                                a(href="post-types/delete/" + postType.id) Delete
+                                a(href="tags/delete/" + tag.id) Delete

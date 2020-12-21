@@ -1,13 +1,13 @@
 import { controller, httpGet, httpPost, httpPut, httpDelete} from 'inversify-express-utils';
 import { inject } from 'inversify';
-import UserService from '../services/user';
+import IUserService from '../services/interfaces/Iuser';
 import { Request, Response, NextFunction } from "express";
 import TYPES from '../constant/types';
 
 @controller('/admin/users')
 export class UserController {
 
-    constructor(@inject(TYPES.UserService) private userService: UserService) {}
+    constructor(@inject(TYPES.UserService) private userService: IUserService) {}
 
     @httpGet('/')
     public getUsers(req : Request, res: Response) {

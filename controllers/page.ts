@@ -1,8 +1,6 @@
 import { controller, httpGet, httpPost, httpPut, httpDelete, request, response, next} from 'inversify-express-utils';
 import { inject } from 'inversify';
-import IPage, {IPageModel} from '../models/Ipage';
-import Page from '../models/page';
-import PageService from '../services/page';
+import IPageService from '../services/interfaces/Ipage';
 import { Request, Response, NextFunction } from "express";
 import TYPES from '../constant/types';
 const auth = require('../auth/auth');
@@ -10,7 +8,7 @@ const auth = require('../auth/auth');
 @controller('/admin/pages')
 export class PageController {
 
-    constructor(@inject(TYPES.PageService) private pageService: PageService) {}
+    constructor(@inject(TYPES.PageService) private pageService: IPageService) {}
 
     @httpGet('/', auth.required)
     public async getPages(req : Request, res: Response) {

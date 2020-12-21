@@ -17,14 +17,15 @@ import UserService from './services/user';
 import PageService from './services/page';
 import NavItemService from './services/nav-item';
 import PostService from './services/post';
-import PostTypeService from './services/post-type';
+import TagService from './services/tag';
+import UploadService from './services/upload';
 
 // Repositories
 import UserRepository from './models/user';
 import PageRepository from './models/page';
 import NavItemRepository from './models/nav-item';
 import PostRepository from './models/post';
-import PostTypeRepository from './models/post-type'
+import TagRepository from './models/tag'
 
 // Controllers
 import './controllers/admin';
@@ -32,7 +33,8 @@ import './controllers/user';
 import './controllers/page';
 import './controllers/nav-item';
 import './controllers/post';
-import './controllers/post-type';
+import './controllers/tag';
+import './controllers/upload';
 
 // Setting up the container
 let container = new Container();
@@ -40,13 +42,14 @@ container.bind<UserService>(TYPES.UserService).to(UserService);
 container.bind<PageService>(TYPES.PageService).to(PageService);
 container.bind<NavItemService>(TYPES.NavItemService).to(NavItemService);
 container.bind<PostService>(TYPES.PostService).to(PostService);
-container.bind<PostTypeService>(TYPES.PostTypeService).to(PostTypeService);
+container.bind<TagService>(TYPES.TagService).to(TagService);
+container.bind<UploadService>(TYPES.UploadService).to(UploadService);
 
 container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository);
 container.bind<PageRepository>(TYPES.PageRepository).to(PageRepository);
 container.bind<NavItemRepository>(TYPES.NavItemRepository).to(NavItemRepository);
 container.bind<PostRepository>(TYPES.PostRepository).to(PostRepository);
-container.bind<PostTypeRepository>(TYPES.PostTypeRepository).to(PostTypeRepository);
+container.bind<TagRepository>(TYPES.TagRepository).to(TagRepository);
 
 // Mongoose setup
 if(!process.env.DB_HOST){

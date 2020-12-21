@@ -1,7 +1,6 @@
 import { controller, httpGet, httpPost, httpPut, httpDelete, request, response, next} from 'inversify-express-utils';
 import { inject } from 'inversify';
-import INavItem, {INavItemModel} from '../models/Inav-item';
-import NavItemService from '../services/nav-item';
+import INavItemService from '../services/interfaces/Inav-item';
 import { Request, Response, NextFunction } from "express";
 import TYPES from '../constant/types';
 const auth = require('../auth/auth');
@@ -9,7 +8,7 @@ const auth = require('../auth/auth');
 @controller('/admin/nav-items')
 export class NavItemController {
 
-    constructor(@inject(TYPES.NavItemService) private navItemService: NavItemService) {}
+    constructor(@inject(TYPES.NavItemService) private navItemService: INavItemService) {}
 
     @httpGet('/', auth.required)
     public async getNavItems(req : Request, res: Response) {

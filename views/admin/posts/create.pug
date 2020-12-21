@@ -7,8 +7,16 @@ block content
                 input(type="text" name="title" placeholder="")
             br
             p Content:
-            each field in fields
-                
+                textarea(id="post-body" name="body" placeholder="")
+            br
+            p Tags:
+                if (tags.length)
+                    select(name="tags")
+                        each tag in tags
+                            option(value=tag.id)=tag.title
+                        else
+                            p No Tags.
+            br
             input(type="submit")
     script.
         $(document).ready(function(){

@@ -1,10 +1,10 @@
 import { inject, injectable } from 'inversify';
 import { IPageModel, IPageRepository } from '../models/Ipage';
+import IPageService from './interfaces/Ipage';
 import TYPES from '../constant/types';
-// import { NotFoundError } from 'restify-errors';
 
 @injectable()
-export default class UserService {
+export default class PageService implements IPageService {
 
   constructor (@inject(TYPES.PageRepository) private pageRepository: IPageRepository) {}
 

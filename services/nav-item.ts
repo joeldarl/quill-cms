@@ -1,9 +1,10 @@
 import { inject, injectable } from 'inversify';
 import { INavItemModel, INavItemRepository } from '../models/Inav-item';
+import INavItemService from './interfaces/Inav-item';
 import TYPES from '../constant/types';
 
 @injectable()
-export default class UserService {
+export default class NavItemService implements INavItemService{
 
   constructor (@inject(TYPES.NavItemRepository) private navItemRepository: INavItemRepository) {}
 
@@ -24,6 +25,8 @@ export default class UserService {
     navItem.title = navItemObject.title;
     navItem.url = navItemObject.url;
     navItem.save();
+
+    return navItem;
   }
 
   public async updateNavItem(id : string, navItemObject : INavItemModel) {
@@ -44,16 +47,12 @@ export default class UserService {
 
   public async orderUpdate(ids : Array<number>) {
     for(var i = 0; i < ids.length; i++) {
-        try {
-            let navItem = await this.navItemRepository.NavItem.findOne({_id: ids[i]});
-            if(navItem){
-                navItem.order = i + 1;
-                navItem.save();
-            }
-        }
-        catch (err) {
-            return {err : 'Could not save'};
+        let navItem = await this.navItemRepository.NavItem.findOne({_id: ids[i]});
+        if(navItem){
+            navItem.order = i + 1;
+            navItem.save();
         }
     }
+    return true;
   }
 }

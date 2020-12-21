@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    body
+        form(action="/admin/tags/create" method="POST")
+            p Title:
+                input(type="text" name="title")
+            br
+            input(type="submit")

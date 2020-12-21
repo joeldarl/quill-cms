@@ -1,10 +1,11 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { IPostRepository } from './Ipost';
+import IPost, { IPostRepository } from './Ipost';
 import { ObjectId } from 'mongoose';
 import { injectable } from 'inversify';
+import ITag from './Itag';
 
-class Post {
-    _id!: ObjectId;
+class Post implements IPost{
+    // _id!: ObjectId;
 
     @prop({ required: true })
     public title: string
@@ -12,11 +13,11 @@ class Post {
     @prop({ required: true, default: Date.now })
     public date: Date
 
-    @prop({ required: true, unique: true, ref: 'PostType' })
-    public postType: ObjectId
-
     @prop({ required: true })
     public body: string
+
+    @prop({ ref:'Post' })
+    public tags: [ObjectId]
 }
 
 @injectable()

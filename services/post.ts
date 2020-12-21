@@ -1,27 +1,37 @@
-import { inject, injectable } from 'inversify';
-import { IPostModel, IPostRepository } from '../models/Ipost';
+import { inject, injectable, postConstruct } from 'inversify';
+import IPost, { IPostModel, IPostRepository } from '../models/Ipost';
 import TYPES from '../constant/types';
-// import { NotFoundError } from 'restify-errors';
+import IPostService from './interfaces/Ipost';
+import { post } from 'typegoose';
+import { convertToObject } from 'typescript';
 
 @injectable()
-export default class PostService {
+export default class PostService implements IPostService {
 
   constructor (@inject(TYPES.PostRepository) private postRepository: IPostRepository) {}
 
   public async getPost(id : string) {
+    // return new Promise<IPost>((resolve, reject) => {
+    //     this.postRepository.Post.findOne({_id : id}, (error: Error, object : IPost)=>{
+    //         resolve(object);
+    //     });
+    // });
     return await this.postRepository.Post.findOne({_id : id});
   }
 
   public async getPosts() {
-    return await this.postRepository.Post.find();
+    let posts = await this.postRepository.Post.find();
+    return (posts) ? posts.map(o => o.toObject()) : [{}];
   }
 
   public async createPost(postObject : IPostModel) {
-    return await new this.postRepository.Post({
+    let post = await new this.postRepository.Post({
         title : postObject.title,
-        postType : postObject.postType,
-        body : postObject.body
+        body : postObject.body,
+        tags : postObject.tags
     }).save();
+
+    return post;
   }
 
   public async updatePost(id : string, postObject : IPostModel) {
@@ -29,12 +39,14 @@ export default class PostService {
 
     if(post){
         post.title = postObject.title;
-        post.postType = postObject.postType;
         post.body = postObject.body;
+        post.tags = postObject.tags;
         post.save();
-    }
 
-    return post;
+        return post;
+    }
+    else
+    return {}
   }
 
   public async deletePost(id : string) {
