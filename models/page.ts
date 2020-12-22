@@ -1,11 +1,9 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { IPageRepository } from './Ipage';
+import { IPageRepository } from './interfaces/Ipage';
 import { ObjectId } from 'mongoose';
 import { injectable } from 'inversify';
 
 class Page {
-    _id!: ObjectId;
-
     @prop({ required: true })
     public title: string
 

@@ -1,5 +1,5 @@
 import { prop, getModelForClass, pre } from '@typegoose/typegoose';
-import ITag, { ITagRepository } from './Itag';
+import ITag, { ITagRepository } from './interfaces/Itag';
 import { ObjectId } from 'mongoose';
 import { injectable } from 'inversify';
 
@@ -8,8 +8,6 @@ import { injectable } from 'inversify';
 })
 
 class Tag implements ITag{
-    _id!: ObjectId;
-
     @prop({ required: true })
     public title: string
 

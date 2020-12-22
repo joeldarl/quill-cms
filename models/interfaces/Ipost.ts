@@ -1,6 +1,5 @@
 import { ModelType } from 'typegoose';
 import { ObjectId } from 'mongoose';
-import ITag, { ITagModel } from './Itag';
 
 export default interface IPost {
     title: string,

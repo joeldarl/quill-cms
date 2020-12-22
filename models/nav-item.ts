@@ -1,11 +1,9 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { INavItemRepository } from './Inav-item';
+import { INavItemRepository } from './interfaces/Inav-item';
 import { ObjectId } from 'mongoose';
 import { injectable } from 'inversify';
 
 class NavItem {
-    _id!: ObjectId;
-
     @prop({ required: true })
     public title: string
 

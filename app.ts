@@ -36,7 +36,7 @@ import './controllers/post';
 import './controllers/tag';
 import './controllers/upload';
 
-// Setting up the container
+// Setting up the ioc container
 let container = new Container();
 container.bind<UserService>(TYPES.UserService).to(UserService);
 container.bind<PageService>(TYPES.PageService).to(PageService);
