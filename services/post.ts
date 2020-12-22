@@ -1,5 +1,5 @@
 import { inject, injectable, postConstruct } from 'inversify';
-import IPost, { IPostModel, IPostRepository } from '../models/Ipost';
+import IPost, { IPostModel, IPostRepository } from '../models/interfaces/Ipost';
 import TYPES from '../constant/types';
 import IPostService from './interfaces/Ipost';
 import { post } from 'typegoose';

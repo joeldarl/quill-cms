@@ -1,6 +1,5 @@
 import { controller, httpGet, httpPost, httpPut, httpDelete} from 'inversify-express-utils';
 import { inject } from 'inversify';
-import IUser, {IUserModel} from '../models/Iuser';
 import UserService from '../services/user';
 import { Request, Response } from "express";
 import TYPES from '../constant/types';

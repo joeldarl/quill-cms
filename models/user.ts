@@ -1,6 +1,6 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 import { instanceMethod } from 'typegoose';
-import { IUserRepository } from './Iuser';
+import { IUserRepository } from './interfaces/Iuser';
 import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongoose';
 import { injectable } from 'inversify';

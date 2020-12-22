@@ -1,4 +1,4 @@
-import IPost, { IPostModel } from "../../models/Ipost";
+import IPost, { IPostModel } from "../../models/interfaces/Ipost";
 
 export default interface IPostService {
     getPost(id : string) : Promise<any>;

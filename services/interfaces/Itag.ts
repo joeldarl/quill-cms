@@ -1,4 +1,4 @@
-import ITag, { ITagModel } from "../../models/Itag";
+import ITag, { ITagModel } from "../../models/interfaces/Itag";
 
 export default interface ITagService {
     getTag(id : string) : Promise<any>;

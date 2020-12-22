@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { IUserModel, IUserRepository } from '../models/Iuser';
+import { IUserModel, IUserRepository } from '../models/interfaces/Iuser';
 import TYPES from '../constant/types';
 import jwt from 'jsonwebtoken';
 import IUserService from './interfaces/Iuser';

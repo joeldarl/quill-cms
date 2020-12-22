@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { INavItemModel, INavItemRepository } from '../models/Inav-item';
+import { INavItemModel, INavItemRepository } from '../models/interfaces/Inav-item';
 import INavItemService from './interfaces/Inav-item';
 import TYPES from '../constant/types';
 

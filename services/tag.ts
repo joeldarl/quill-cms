@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { ITagModel, ITagRepository } from '../models/Itag';
+import { ITagModel, ITagRepository } from '../models/interfaces/Itag';
 import ITagService from './interfaces/Itag';
 import TYPES from '../constant/types';
 

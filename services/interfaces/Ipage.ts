@@ -1,4 +1,4 @@
-import IPage, { IPageModel } from "../../models/Ipage";
+import IPage, { IPageModel } from "../../models/interfaces/Ipage";
 
 export default interface IPageService {
     getPage(id : string) : Promise<any>;

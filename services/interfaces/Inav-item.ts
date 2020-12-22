@@ -1,4 +1,4 @@
-import INavItem, { INavItemModel } from "../../models/Inav-item";
+import INavItem, { INavItemModel } from "../../models/interfaces/Inav-item";
 
 export default interface INavItemService {
     getNavItem(id : string) : Promise<any>;

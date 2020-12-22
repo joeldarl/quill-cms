@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { IPageModel, IPageRepository } from '../models/Ipage';
+import { IPageModel, IPageRepository } from '../models/interfaces/Ipage';
 import IPageService from './interfaces/Ipage';
 import TYPES from '../constant/types';
 
