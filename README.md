@@ -1,5 +1,5 @@
 # Quill CMS
-A publishing CMS developed using NodeJS, TypeScript and MongoDB. This project is in ongoing development!
+A publishing CMS developed using NodeJS, TypeScript and MongoDB. This project is an ongoing development!
 
 ## Features
 - Json web token authentication
