@@ -52,7 +52,7 @@ for (var i = 0; i < Object.keys(args).length; i++) {
 
 async function keygen() {
     let secretProp = new EnvProp();
-    secretProp.key = 'SECRET';
+    secretProp.key = 'JWT_SECRET';
     secretProp.value = Crypto.randomBytes(48).toString('hex');
     return secretProp;
 }
@@ -80,7 +80,7 @@ async function promptDbHost() {
     }
     let result = await inquirer.prompt(question)
     let dbHostProp = new EnvProp();
-    dbHostProp.key = 'TITLE';
+    dbHostProp.key = 'DB_HOST';
     dbHostProp.value = result.dbHost;
     return dbHostProp; 
 }
@@ -131,13 +131,23 @@ async function promptRegister() {
           return true;
         }
       
-        return 'Password needs to have at least a letter and a number';
+        return 'Password needs to use a mixture of letters and numbers.';
     };
+
+    function validateEmail(email : string) {
+        const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (regex.test(String(email).toLowerCase())){
+            return true;
+        }
+
+        return 'Email address is not formatted correctly.'
+    }
 
     questions.push({
         type: 'input',
         name: 'email',
         message: 'Enter an email address:',
+        validate: validateEmail
     });
 
     questions.push({
@@ -189,7 +199,7 @@ async function updateEnv(envObject : EnvObject) {
         properties.push(property?.key + '=' + property?.value);
     });
 
-    await fse.writeFile('./test.env', properties.join('\n'), function(err : Error){
+    await fse.writeFile('./.env', properties.join('\n'), function(err : Error){
         if (err){
             throw err;
         }

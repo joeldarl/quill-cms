@@ -5,7 +5,7 @@
   "scripts": {
     "start": "set NODE_ENV=production && ts-node app.ts",
     "dev": "set NODE_ENV=development && node ./bin/www",
-    "register": "node cli.ts --register",
+    "register": "ts-node cli.ts --register",
     "init": "ts-node cli.ts --init"
   },
   "dependencies": {
@@ -66,6 +66,7 @@
     "@types/passport": "^1.0.4",
     "@types/passport-local": "^1.0.33",
     "@types/restify-errors": "^4.3.3",
+    "@types/showdown": "^1.9.3",
     "@types/validator": "^13.1.2"
   }
 }

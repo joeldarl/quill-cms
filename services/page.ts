@@ -2,6 +2,7 @@ import { inject, injectable } from 'inversify';
 import { IPageModel, IPageRepository } from '../models/interfaces/Ipage';
 import IPageService from './interfaces/Ipage';
 import TYPES from '../constant/types';
+import showdown from 'showdown'
 
 @injectable()
 export default class PageService implements IPageService {
@@ -14,6 +15,16 @@ export default class PageService implements IPageService {
 
   public async getPages() {
     return await this.pageRepository.Page.find();
+  }
+
+  public async getPageByUrl(url : string) {
+    let page = await this.pageRepository.Page.findOne({url : url});
+    if (!page)
+      return null;
+
+    var converter = new showdown.Converter();
+    page.body = converter.makeHtml(page.body);
+    return page;
   }
 
   public async createPage(pageObject : IPageModel) {

@@ -27,21 +27,6 @@ export default class UserService implements IUserService {
 
   // Creating a new user
   public async createUser(userObject : IUserModel){
-    // let user = await this.userRepository.User.findOne({
-    //   email: userObject.email
-    // });
-
-    // if(user) {
-    //   // User already exists, error needed.
-    // }
-    // else {
-    //   user = await new this.userRepository.User({email: userObject.email});
-    //   user.setPassword(userObject.password);
-    //   user.save();
-    // }
-
-    // return await this.userRepository.User.create({email: userObject.email})
-
     let user = await new this.userRepository.User({email: userObject.email});
     user.setPassword(userObject.password);
     return await user.save();

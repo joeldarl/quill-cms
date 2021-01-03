@@ -23,7 +23,6 @@ export class UserController {
     @httpPost('/login')
     public async login(req : Request, res: Response, next: NextFunction) {
         const userValidate = await this.userService.login(req.body);
-        console.log(userValidate);
         if(userValidate) {
             res.cookie('auth', userValidate.token);
             req.flash('notifications', 'Login successful.');

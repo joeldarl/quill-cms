@@ -1,398 +1,68 @@
-main
-    flex-grow: 3
-    overflow: auto
-    max-width: 1000px
-    padding-top: 25px
-    padding-left: 100px
-    padding-right: 100px
-    padding-bottom: 50px
-    h1
-        font: 2em Source Sans Pro, Helvetica, Arial, sans-serif
-        margin-bottom: 25px
-        color: $admin_nav_colour
-
-nav
-    min-width: 220px
-    padding: 20px 25px
-    overflow: auto
-    background-color: #1A1844
-    h1
-        font: 2.5em Montserrat, Helvetica, Arial, sans-serif
-        color: white
-        margin-left: 0
-        img
-            // height: 40px
-            // margin-bottom: -7px
-            height: 32px;
-            margin-bottom: -5px;
-            margin-left: -2px;
-    ul
-        list-style-type: none
-        margin: 0
-        margin-top: 65px
-        padding: 0
-        overflow: hidden
-        li
-            display: flex
-            opacity: 0.6
-        .selected
-            background-color: rgba(255, 255, 255, 0.1)
-            border-radius: $global_border_radius
-            opacity: 1
-        img
-            width: 16px
-            margin-right: 10px
-            vector-effect: non-scaling-stroke
-        a
-            font-size: 1em
-            display: flex
-            padding: 12px
-            width: 100%
-            align-items: center
-            text-decoration: none
-            color: #fff
-     
-.table
-    width: 100%
-    color: $input_label_colour
-    margin-bottom: 20px
-    display: table
-    // table-layout: fixed
-    border-collapse: separate
-    h2, time, a
-      font-size: 1em
-      font-weight: normal
-    h2, time
-      margin: 0
-      white-space: nowrap
-    a
-        color: $input_label_colour
-    .table-contents
-      border-radius: $global_border_radius
-      display: table-row-group
-      .row:first-child div
-        border-top: 1px solid $input_border_colour
-      .row div:first-child
-        border-left: 1px solid $input_border_colour
-      .row:last-child div:last-child
-        border-radius: 0 0 $global_border_radius 0
-      .row:last-child div:first-child
-        border-radius: 0 0 0 $global_border_radius
-      .row:first-child div:first-child
-        border-radius: $global_border_radius 0 0 0
-      .row:first-child div:last-child
-        border-radius: 0 $global_border_radius 0 0
-    .row
-        display: table-row
-        width: 100%
-        div
-            border: 1px solid $input_border_colour
-            border-style: none solid solid none
-            display: table-cell
-            vertical-align: middle
-            padding: 12px 12px
-            // word-wrap: break-word
-        &:not(:first-child)
-            border-top: 1px solid $input_border_colour
-        >div:last-child
-            text-align: right
-    >.row
-        padding: 10px 12px
-        div
-            border: none
-    input
-      margin-left: 0
-    img
-        display: table-cell
-        margin: auto
-        opacity: 0.35
-        height: 18px
-
-.sort-table.table
-    border-spacing: 4px
-    margin-bottom: 14px
-    .row>div
-        padding: 9px 12px
-        border: none
-        &:nth-last-child(-n+2)
-            border: none
-            text-align: center
-        &:first-child
-            padding: 0 !important
-    .sortable
-        cursor: move
-        .row
-            padding: 1px 0px
-            border: none
-        >.row>div
-            padding: 9px 12px
-            border: none
-            border: 1px solid $input_border_colour
-            margin: 3px 5px 0px 0px
-            border-radius: $global_border_radius !important
-            background-color: white
-            &:nth-last-child(-n+2), &:nth-child(1)
-                border: none
-                background-color: inherit
-            &:nth-child(0)
-                padding: 0
-            img
-                opacity: 0.35
-
-.edit-form
-    display: flex
-    >.column
-        flex-basis: 0
-        &:nth-child(1)
-            flex-grow: 2
-        &:nth-child(2)
-            margin-left: 50px
-            flex-grow: 1
-    input[type="text"], select
-        width: 100%
-        box-sizing: border-box
-    input[type="submit"]
-        float: right
-        margin-top: -60px
-        margin-right: 0
-        cursor: pointer
-   
-.login form
-    width: 250px
-    margin: auto
-    margin-top: 20vh
-    display: flex
-    flex-direction: column
-    .form-inner 
-        border: 1px solid $input_border_colour
-        border-radius: $global_border_radius * 2
-        padding: 20px
-    h1
-        display: inline-block
-        text-align: center
-        margin-top: 0
-        font-size: 2em
-        font-family: Montserrat, Arial, Helvetica, sans-serif
-        margin-bottom: 20px
-    img
-        display: inline-block
-        height: 40px
-        margin-bottom: -7px
-    .form-line
-        margin-bottom: 15px
-    input
-        width: 100%
-        box-sizing: border-box
-    input[type="submit"]
-        float: none
-        margin: 0
-        margin-top: 30px
-        border: none      
-
-.btn
-    display: inline-block
-    vertical-align: middle
-    padding: 12px 20px
-    margin-right: 20px
-    font-size: 1em
-    color: white
-    text-decoration: none
-    font: 1em Source Sans Pro, Helvetica, Arial, sans-serif
-    background-color: $button_colour
-    border-radius: $global_border_radius
-    border: none
-    cursor: pointer
-    &:active, &:hover, &:focus
-        outline: none
-
-.btn-invert
-    border: 1px solid $button_colour
-    background-color: white
-    color: $button_colour
-
-.btn-gray
-    border: 1px solid $input_border_colour
-    background-color: white
-    color: $input_label_colour
-
-.btn-trash
-    img
-        opacity: 0.35
-        margin-top: -2px
-
-.input-group
-    label
-        display: block
-        padding: 12px 12px
-        font: 1em Source Sans Pro, Helvetica, Arial, sans-serif
-        color: $input_label_colour
-    input, select
-        font: 1em Source Sans Pro, Helvetica, Arial, sans-serif
-        padding: 12px
-        width: 100%
-        box-sizing: border-box
-        border: 1px solid $input_border_colour
-        border-radius: $global_border_radius
-        &:focus
-            outline: none
-    input[type="time"]
-        height: 44px
-
-.input-group-50
-    width: 48%
-    display: inline-block
-
-.input-group-50:last-of-type
-    float: right
-
-.flatpickr-calendar
-    box-shadow: inherit !important
-    -webkit-box-shadow: inherit !important
-    border: 1px solid $input_border_colour !important
-    &.arrowTop:before
-        border-bottom: 5px solid $input_border_colour !important
-
-.flatpickr-day
-    border-radius: $global_border_radius !important
-    &:hover
-        border-radius: $global_border_radius !important
-    &.selected
-        background-color: $button_colour !important
-        border: none !important
-        border-radius: $global_border_radius !important
-
-.images-container
-    display: block
-    margin-top: 50px
-
-.image-item
-    display: inline-block
-    margin-right: 40px
-    margin-bottom: 40px
-    .image-wrap
-        position: relative
-        display: inline-block
-        width: 100%
-        padding-top: 100%
-        border: 1px solid $input_border_colour
-        border-radius: $global_border_radius
-        box-sizing: border-box
-        overflow: hidden
-        margin-bottom: 8px
-        img
-            border: none
-            height: 100%
-            top: 50%
-            left: 50%
-            transform: translate(-50%, -50%)
-            position: absolute
-            box-sizing: border-box
-    .btn
-        margin-right: 10px
-        &:last-child
-            margin-right: 0
-            height: 18px
-    .url-field
-        position: absolute
-        left: -100%
-        opacity: 0
-
-.input-file-container 
-  position: relative
-  display: inline-block
- 
-.input-file-trigger 
-    margin-right: 0
-    padding: 12px 12px
-    font-size: 1em
-    transition: all .4s
-    cursor: pointer
-    vertical-align: middle
-    border-radius: $global_border_radius 0 0 $global_border_radius
-
-.input-file 
-  opacity: 0
-  width: 0
-  cursor: pointer
-
-.file-return 
+.quill
     margin: 0
-    display: inline-block
-    position: relative
-    padding: 12px
-    height: 18px
-    min-width: 200px
-    max-width: 380px
-    vertical-align: middle
-    border: 1px solid $button_colour
-    border-left: none
-    border-radius: 0 $global_border_radius $global_border_radius 0
-    overflow: hidden
-    p
-        margin: 0
-        white-space: nowrap
+    font-size: 20px
 
-.uploads-form
-    margin-top: 67px
-    input[type="submit"]
-        margin-left: 10px
-        height: 44px
-        vertical-align: middle
-
-.editor-toolbar:before
-    margin-bottom: 5px !important
-
-.editor-toolbar:after
-    margin-top: 5px !important
-
-.flash-message
-    position: fixed
-    left: 50%
-    transform: translateX(-50%)
-    -webkit-transform: translateX(-50%, -50%)
-    border-radius: 2px
-    padding: 10px 10px
-    display: block
-    pointer-events: none
-    animation-delay: 0.2s
-    border-radius: $global_border_radius
-    z-index: 1000
-    top: 20px
-    p
-        margin: 5px
-        text-align: left
-        vertical-align: middle
-    h2
-        font-size: 1.2em
-        display: inline-block
-        vertical-align: middle
-        margin-right: 5px
-    img
-        vertical-align: middle
-    &.warning
+.quill header
+    padding: 0px 50px 20px 50px
+    background-color: $banner_colour
+    h1
+        margin-top: 80px
+        margin-bottom: 10px
+        color: white
         text-align: center
-        animation: flash 6s both
-        background-color: #FFF5F5
-        border: 1px solid#DA3131
-        color: #DA3131
-    &.notification
-        animation: flash 4s both
-        background-color: #E4FDFD
-        border: 1px solid #009F9F
-        color: #009F9F
-        p
-            display: inline-block
-        img
-            margin-right: 5px
+        font-size: 2.8em
+        font-family: TTNorms
+        font-weight: bold
+        letter-spacing: 1px
 
-@keyframes flash
-    0%
-        opacity: 0
-        top: 5px
-    15%
-        opacity: 1
-        top: 20px
-    90%
-        opacity: 1
-    100%
-        opacity: 0
+.quill nav
+    text-align: center
+    ul
+        list-style: none
+        margin: 0
+        padding: 0
+        li
+            display: inline-block
+            margin: 20px 50px
+            font-family: TTNorms
+            a
+                color: $text-colour
+                text-decoration: none
+
+.container
+    padding-top: 60px
+    padding-right: 20px
+    padding-left: 20px
+    max-width: 800px
+    margin: auto
+
+.pagination
+    padding: 100px
+    margin: auto
+    text-align: center
+    a
+        text-decoration: none
+        font-family: TTNorms
+        color: $text-colour
+        padding: 2px
+
+article
+    margin-bottom: 60px
+    img
+        max-width: 100%
+        display: block
+        margin: auto
+        width: 320px
+    div
+        margin-top: 40px
+    h2
+        margin-bottom: 10px
+        font-family: TTNorms
+        font-weight: bold
+        letter-spacing: 1px
+    p
+        font-family: Untitled Sans
+
+time
+  font-size: 1.1em
+  font-family: Untitled Sans

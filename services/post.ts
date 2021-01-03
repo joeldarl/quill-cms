@@ -1,9 +1,8 @@
 import { inject, injectable, postConstruct } from 'inversify';
-import IPost, { IPostModel, IPostRepository } from '../models/interfaces/Ipost';
+import { IPostModel, IPostRepository } from '../models/interfaces/Ipost';
 import TYPES from '../constant/types';
 import IPostService from './interfaces/Ipost';
-import { post } from 'typegoose';
-import { convertToObject, resolveModuleName } from 'typescript';
+import showdown from 'showdown';
 
 @injectable()
 export default class PostService implements IPostService {
@@ -22,6 +21,26 @@ export default class PostService implements IPostService {
   public async getPosts() {
     let posts = await this.postRepository.Post.find();
     return (posts) ? posts.map(o => o.toObject()) : [{}];
+  }
+
+  public async getPostsPaginated(page : number, limit : number, html : boolean = false) {
+    let posts = await this.postRepository.Post.find()      
+      .limit(limit)
+      .skip((page as number -1) * (limit as number))
+      .exec();
+
+    if (html){
+      let converter = new showdown.Converter();
+      Object.keys(posts).forEach(function(post, index){
+          posts[index].body = converter.makeHtml(posts[index].body);
+      });
+    }
+
+    return posts;
+  }
+
+  public getPostCount(){
+    return this.postRepository.Post.countDocuments().exec();
   }
 
   public async createPost(postObject : IPostModel) {

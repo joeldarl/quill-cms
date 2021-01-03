@@ -16,10 +16,43 @@
   font-family: "Montserrat";
   src: url("../fonts/Montserrat-SemiBoldItalic.otf") format("opentype"); }
 
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("../fonts/Untitled_Sans_Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "TTNorms";
+  src: url("../fonts/TTNorms-Regular.otf") format("opentype"); }
+
+@font-face {
+  font-family: "TTNorms";
+  src: url("../fonts/TTNorms-Bold.otf") format("opentype");
+  font-weight: bold; }
+
+@font-face {
+  font-family: "TTNorms";
+  src: url("../fonts/TTNorms-Italic.otf") format("opentype");
+  font-style: italic; }
+
+.admin-body h1 {
+  font: 2.8em Source Sans Pro, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  margin: 20px 0px 10px -3px;
+  color: #1A1844; }
+
+.admin-body h2 {
+  font-size: 2em;
+  font-weight: normal;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.admin-body h3 {
+  font: 1.5em Source Sans Pro, Helvetica, Arial, sans-serif;
+  color: #1A1844; }
+
 main {
   flex-grow: 3;
   overflow: auto;
-  max-width: 1000px;
   padding-top: 25px;
   padding-left: 100px;
   padding-right: 100px;
@@ -29,37 +62,39 @@ main {
     margin-bottom: 25px;
     color: #1A1844; }
 
-nav {
+.admin-body nav {
   min-width: 220px;
   padding: 20px 25px;
   overflow: auto;
   background-color: #1A1844; }
-  nav h1 {
+  .admin-body nav h1 {
     font: 2.5em Montserrat, Helvetica, Arial, sans-serif;
     color: white;
     margin-left: 0; }
-    nav h1 img {
+    .admin-body nav h1 img {
       height: 32px;
       margin-bottom: -5px;
       margin-left: -2px; }
-  nav ul {
+  .admin-body nav a {
+    text-decoration: none; }
+  .admin-body nav ul {
     list-style-type: none;
     margin: 0;
     margin-top: 65px;
     padding: 0;
     overflow: hidden; }
-    nav ul li {
+    .admin-body nav ul li {
       display: flex;
       opacity: 0.6; }
-    nav ul .selected {
+    .admin-body nav ul .selected {
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 5px;
       opacity: 1; }
-    nav ul img {
+    .admin-body nav ul img {
       width: 16px;
       margin-right: 10px;
       vector-effect: non-scaling-stroke; }
-    nav ul a {
+    .admin-body nav ul a {
       font-size: 1em;
       display: flex;
       padding: 12px;
@@ -70,6 +105,7 @@ nav {
 
 .table {
   width: 100%;
+  max-width: 1000px;
   color: #9A95A2;
   margin-bottom: 20px;
   display: table;
@@ -411,16 +447,87 @@ nav {
   100% {
     opacity: 0; } }
 
-body {
+.quill {
   margin: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  position: fixed;
+  font-size: 20px; }
+
+.quill header {
+  padding: 0px 50px 20px 50px;
+  background-color: #FF915A; }
+  .quill header h1 {
+    margin-top: 80px;
+    margin-bottom: 10px;
+    color: white;
+    text-align: center;
+    font-size: 2.8em;
+    font-family: TTNorms;
+    font-weight: bold;
+    letter-spacing: 1px; }
+
+.quill nav {
+  text-align: center; }
+  .quill nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .quill nav ul li {
+      display: inline-block;
+      margin: 20px 50px;
+      font-family: TTNorms; }
+      .quill nav ul li a {
+        color: #0A0A0A;
+        text-decoration: none; }
+
+.container {
+  padding-top: 60px;
+  padding-right: 20px;
+  padding-left: 20px;
+  max-width: 800px;
+  margin: auto; }
+
+.pagination {
+  padding: 100px;
+  margin: auto;
+  text-align: center; }
+  .pagination a {
+    text-decoration: none;
+    font-family: TTNorms;
+    color: #0A0A0A;
+    padding: 2px; }
+
+article {
+  margin-bottom: 60px; }
+  article img {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    width: 320px; }
+  article div {
+    margin-top: 40px; }
+  article h2 {
+    margin-bottom: 10px;
+    font-family: TTNorms;
+    font-weight: bold;
+    letter-spacing: 1px; }
+  article p {
+    font-family: Untitled Sans; }
+
+time {
+  font-size: 1.1em;
+  font-family: Untitled Sans; }
+
+body {
   font: 14px Source Sans Pro, Helvetica, Arial, sans-serif;
   letter-spacing: 0.2px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased; }
+
+.admin-body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: fixed; }
 
 main {
   flex-grow: 3; }
@@ -487,43 +594,6 @@ main {
 
 .list-width-100 {
   width: 100%; }
-
-a {
-  font: 1.2em Source Sans Pro, Helvetica, Arial, sans-serif; }
-
-h1 {
-  font: 3em Source Sans Pro, Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  margin: 20px 0px 10px -3px;
-  color: #1A1844; }
-
-h2 {
-  font-size: 2em;
-  font-weight: normal;
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
-h3 {
-  font: 1.5em Source Sans Pro, Helvetica, Arial, sans-serif;
-  color: #1A1844; }
-
-time {
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-bottom: 20px; }
-
-article {
-  margin-bottom: 60px; }
-  article img {
-    max-width: 100%;
-    display: block;
-    margin: auto;
-    width: 320px; }
-
-.pagination {
-  float: right; }
-  .pagination a {
-    text-decoration: none; }
 
 .hidden {
   visibility: hidden;

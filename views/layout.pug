@@ -3,16 +3,17 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    div(class="wrap")
-      div
-        h1= title
-        nav
-          ul
-            li
-              a(href='/') Articles
-            if navigation 
-              each navItem in navigation
-                li
-                  a(href=navItem.url)= navItem.title
-        block content
+  body.quill
+    header
+      nav
+        ul
+          li
+            a(href='/') Articles
+          if navigation 
+            each navItem in navigation
+              li
+                a(href=navItem.url)= navItem.title
+      h1= title
+    div.container
+      block content
+    footer

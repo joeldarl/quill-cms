@@ -4,7 +4,6 @@ import express from 'express';
 import flash from 'express-flash';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-import cookieSession from 'cookie-parser';
 import { Container } from 'inversify';
 import TYPES from './constant/types';
 import path from 'path';
@@ -33,6 +32,7 @@ import PostRepository from './models/post';
 import TagRepository from './models/tag'
 
 // Controllers
+import './controllers/front';
 import './controllers/admin';
 import './controllers/user';
 import './controllers/page';
@@ -62,7 +62,7 @@ if(!process.env.DB_HOST){
 }
 
 if(!process.env.JWT_SECRET){
-  throw new Error('No secret specified.')
+  throw new Error('No jwt secret specified.')
 }
 
 mongoose.connect(process.env.DB_HOST, {
@@ -135,7 +135,9 @@ server.setConfig((app) => {
   });
 });
 
-let serverInstance = server.build();
-serverInstance.listen(3000);
+let app = server.build();
+let port = process.env.PORT || 3000;
 
-console.log('Server started on port 3000');
+app.listen(port);
+
+console.log('Server started on port ' + port);
