@@ -57,15 +57,15 @@ container.bind<PostRepository>(TYPES.PostRepository).to(PostRepository);
 container.bind<TagRepository>(TYPES.TagRepository).to(TagRepository);
 
 // Mongoose setup
-if(!process.env.DB_HOST){
-  throw new Error('No database host specified.');
+if(!process.env.DB_URI){
+  throw new Error('No database uri specified.');
 }
 
 if(!process.env.JWT_SECRET){
   throw new Error('No jwt secret specified.')
 }
 
-mongoose.connect(process.env.DB_HOST, {
+mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true, 
   useUnifiedTopology: true, 
   useCreateIndex: true

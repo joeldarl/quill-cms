@@ -5,8 +5,9 @@ const fse = require('fs-extra');
 import Crypto from 'crypto';
 import UserService from './services/user';
 import UserRepository from './models/user';
+import dotenv from 'dotenv';
 
-require('dotenv').config();
+dotenv.config();
 
 const userService = new UserService(new UserRepository());
 class EnvProp {
@@ -54,6 +55,7 @@ async function keygen() {
     let secretProp = new EnvProp();
     secretProp.key = 'JWT_SECRET';
     secretProp.value = Crypto.randomBytes(48).toString('hex');
+    process.env.JWT_SECRET = secretProp.value;
     return secretProp;
 }
 
@@ -68,59 +70,23 @@ async function promptTitle() {
     let titleProp = new EnvProp();
     titleProp.key = 'TITLE';
     titleProp.value = result.title;
+    process.env.TITLE = result.title;
     return titleProp;
 }
 
-async function promptDbHost() {
+async function promptDbUri() {
     let question = {
         type: 'input',
-        name: 'dbHost',
-        message: 'Enter database host:',
+        name: 'dbUri',
+        message: 'Enter database uri:',
         default: 'mongodb://localhost/blog'
     }
     let result = await inquirer.prompt(question)
-    let dbHostProp = new EnvProp();
-    dbHostProp.key = 'DB_HOST';
-    dbHostProp.value = result.dbHost;
-    return dbHostProp; 
-}
-
-async function promptDbUser() {
-    let question = {
-        type: 'input',
-        name: 'dbHost',
-        message: 'Enter database user:',
-        default: null
-    }
-    let result = await inquirer.prompt(question)
-    if(result.dbHost = null) {
-        return null;
-    }
-    else {
-        let dbHostProp = new EnvProp();
-        dbHostProp.key = 'DB_HOST';
-        dbHostProp.value = result.dbHost;
-        return dbHostProp;
-    }
-}
-
-async function promptDbPassword() {
-    let question = {
-        type: 'input',
-        name: 'dbPassword',
-        message: 'Enter database password:',
-        default: null
-    }
-    let result = await inquirer.prompt(question)
-    if(result.dbPassword = null) {
-        return null;
-    }
-    else {
-        let dbPassword = new EnvProp();
-        dbPassword.key = 'DB_PASSWORD';
-        dbPassword.value = result.dbPassword;
-        return dbPassword;
-    }
+    let dbUriProp = new EnvProp();
+    dbUriProp.key = 'DB_URI';
+    dbUriProp.value = result.dbUri;
+    process.env.DB_URI = result.dbUri;
+    return dbUriProp; 
 }
 
 async function promptRegister() {
@@ -196,10 +162,12 @@ async function updateEnv(envObject : EnvObject) {
     let properties : Array<string> = [];
 
     envObject.arrayObject.forEach(property => {
-        properties.push(property?.key + '=' + property?.value);
+        properties.push(property?.key + '=' + "'"+property?.value+"'");
     });
 
-    await fse.writeFile('./.env', properties.join('\n'), function(err : Error){
+    await fse.ensureFile('.env');
+
+    await fse.writeFile('.env', properties.join('\n'), function(err : Error){
         if (err){
             throw err;
         }
@@ -207,11 +175,11 @@ async function updateEnv(envObject : EnvObject) {
 }
 
 async function mongoConnect() {
-    if(!process.env.DB_HOST){
+    if(!process.env.DB_URI){
         throw new Error('No database host specified.');
     }
 
-    mongoose.connect(process.env.DB_HOST, {
+    mongoose.connect(process.env.DB_URI, {
         useNewUrlParser: true, 
         useUnifiedTopology: true, 
         useCreateIndex: true
@@ -226,13 +194,9 @@ async function initialize() {
 
     envObj.arrayObject.push(
         await promptTitle(), 
-        await promptDbHost(),
-        await promptDbUser(),
-        await promptDbPassword(),
+        await promptDbUri(),
         await keygen()
     );
-
-    await register();
 
     try {
         await updateEnv(envObj);
@@ -240,6 +204,8 @@ async function initialize() {
     catch(err) {
         console.log(err);
     }
+
+    await register();
 
     console.log('Initialization complete. Use npm start to run.');
 }
