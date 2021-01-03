@@ -1,0 +1,9 @@
+div.input-group
+    label Title
+    input(type="text" name="title" placeholder="" value=(navItem && navItem.title) ? navItem.title : '')
+br    
+div.input-group
+    label Url
+    input(type="text" name="url" placeholder="" value=(navItem && navItem.url) ? navItem.url : '')
+br
+input(type="submit" class="btn")

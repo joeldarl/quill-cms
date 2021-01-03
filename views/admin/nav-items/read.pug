@@ -1,23 +1,28 @@
 extends ../layout
 
 block content
-    a(class="create-btn" href='/admin/nav-items/create') Create Navigation Item
     if (navItems.length)
-        div(class="table items")
+        div(class="sort-table table items")
             div(class="row")
-                div="Title"
-                div="Date"
+                div.list-width-0
+                div.list-width-50="Title"
+                div.list-width-50="Url"
                 div="Edit"
                 div="Delete"
             div(class="table-contents sortable" id="nav-sort-table")
                 each navItem in navItems
                     div(class="item row" item-id=navItem.id)
-                        div
+                        div.list-width-0
+                            img(src='/images/icon-more.svg')
+                        div.list-width-50
                             h2=navItem.title
-                        div
+                        div.list-width-50
                             h2=navItem.url
                         div
                             a(href="nav-items/edit/" + navItem.id) Edit
                         div
-                            a(href="nav-items/delete/" + navItem.id) Delete
-            a(class="sort-save-btn btn" onclick="saveSort('nav-sort-table', '/admin/nav-items/orderUpdate')")="Save order"
+                            a(href="nav-items/delete/" + navItem.id) <img src="/images/icon-trash.svg"/>
+        a(class="btn sort-save-btn" onclick="saveSort('nav-sort-table', '/admin/nav-items/orderUpdate')")="Save order"
+    else
+        h2 No navigation items available.
+    a(class="btn btn-invert create-btn" href='/admin/nav-items/create') Create Navigation Item

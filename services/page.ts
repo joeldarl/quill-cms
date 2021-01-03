@@ -25,16 +25,11 @@ export default class PageService implements IPageService {
   }
 
   public async updatePage(id : string, pageObject : IPageModel) {
-    let page = await this.pageRepository.Page.findOne({_id : id});
-
-    if(page){
-        page.title = pageObject.title;
-        page.url = pageObject.url;
-        page.body = pageObject.body;
-        page.save();
-    }
-
-    return page;
+    return await this.pageRepository.Page.updateOne({_id : id}, {
+      title : pageObject.title,
+      url : pageObject.url,
+      body : pageObject.body,
+    }, { runValidators: true });
   }
 
   public async deletePage(id : string) {

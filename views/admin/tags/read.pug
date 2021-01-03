@@ -1,19 +1,22 @@
 extends ../layout
 
 block content
-    a(class="create-btn" href='/admin/tags/create') Create tag
     if (tags.length)
         div(class="table items")
             div(class="row")
-                div="Title"
+                div.list-width-100="Title"
                 div="Edit"
                 div="Delete"
             div(class="table-contents")
                     each tag in tags
                         div(class="item row")
-                            div
+                            div.list-width-100
                                 h2=tag.title
                             div
                                 a(href="tags/edit/" + tag.id) Edit
                             div
-                                a(href="tags/delete/" + tag.id) Delete
+                                a(href="tags/delete/" + tag.id)
+                                    img(src="/images/icon-trash.svg")
+    else
+        h2 No tags available.
+    a(class="btn btn-invert create-btn" href='/admin/tags/create') Create tag

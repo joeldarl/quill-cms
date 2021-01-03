@@ -2,8 +2,5 @@ extends ../layout
 
 block content
     body
-        form(action="/admin/tags/update/"+tag.id method="POST")
-            p Title:
-                input(type="text" name="title" value=tag.title)
-            br
-            input(type="submit")
+        form(action="/admin/tags/update/"+tag._id method="POST")
+            include ../includes/tag-edit-form.pug 

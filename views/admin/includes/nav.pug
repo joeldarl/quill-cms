@@ -1,18 +1,26 @@
+block variables
+    - 
+        var NavItems = [
+            {'url' : '/posts', 'title': 'Posts', 'icon': 'edit'},
+            {'url' : '/tags', 'title': 'Tags', 'icon': 'tag'},
+            {'url' : '/pages', 'title': 'Pages', 'icon': 'layout'},
+            {'url' : '/nav-items', 'title': 'Navigation', 'icon': 'link'},
+            {'url' : '/users', 'title': 'Users', 'icon': 'users'},
+            {'url' : '/uploads', 'title': 'Upload Image', 'icon': 'folder'},
+            {'url' : '/users/logout', 'title': 'Logout', 'icon': 'power'}
+        ]
+    //- - var page = window.location.pathname
+
 nav
+    header
+        //a(href="/admin")
+        h1 quill <img src='/images/logo-quill.svg'>
+
     ul
-        li
-            a(href='/admin/') Dashboard
-        li
-            a(href='/admin/posts') Posts
-        li
-            a(href='/admin/tags') Tags
-        li
-            a(href='/admin/pages') Pages
-        li
-            a(href='/admin/nav-items') Navigation
-        li
-            a(href='/admin/users') Users
-        li
-            a(href='/admin/uploads') Upload Image
-        li(class="logout")
-            a(href='/admin/users/logout') Logout
+        each NavItem in NavItems
+            if path.includes('/admin'+NavItem.url)
+                li.selected
+                    a(href='/admin'+NavItem.url) <img src='/images/icon-#{NavItem.icon}.svg'> #{NavItem.title}
+            else 
+                li
+                    a(href='/admin'+NavItem.url) <img src='/images/icon-#{NavItem.icon}.svg'> #{NavItem.title}

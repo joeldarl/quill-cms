@@ -8,7 +8,7 @@ import { injectable } from 'inversify';
 })
 
 class Tag implements ITag{
-    @prop({ required: true })
+    @prop({ required: [true, 'Name is required.'] })
     public title: string
 
     @prop({ required: true, default: Date.now })

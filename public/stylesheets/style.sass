@@ -8,29 +8,60 @@
   font-family: "Roboto"
   src: url('../fonts/Roboto-Regular.ttf') format('truetype')
 
+@font-face
+  font-family: "Source Sans Pro"
+  src: url('../fonts/SourceSansPro-Regular.otf') format('opentype')
+
+@font-face
+  font-family: "Montserrat"
+  src: url('../fonts/Montserrat-SemiBoldItalic.otf') format('opentype')
+
+$admin_nav_colour: #1A1844
+$button_colour: #009F9F
+$input_border_colour: #D0D0D9
+$input_label_colour: #9A95A2
+
+$global_border_radius: 5px
+
+@import './components'
+
 body
-  padding: 20px
-  font: 14px Consolas, Helvetica, Arial, sans-serif
+  margin: 0
+  height: 100%
+  width: 100%
+  display: flex
+  position: fixed
+  font: 14px Source Sans Pro, Helvetica, Arial, sans-serif
+  letter-spacing: 0.2px
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
-  .wrap
-    width: 100%
-    max-width: 600px
-    margin: auto
+
+main
+  flex-grow: 3
+
+// woooaahh cooool a loop for column widthing: wow!
+@for $i from 1 through 21
+  .list-width-#{($i - 1) * 5}
+    width: #{($i - 1) * 5 +'%'}
 
 a
-  font: 1.2em Consolas, Helvetica, Arial, sans-serif
+  font: 1.2em Source Sans Pro, Helvetica, Arial, sans-serif
 
 h1
-  font: 3em Consolas, Helvetica, Arial, sans-serif
+  font: 3em Source Sans Pro, Helvetica, Arial, sans-serif
   font-weight: bold
   margin: 20px 0px 10px -3px
+  color: $admin_nav_colour
 
 h2
   font-size: 2em
   font-weight: normal
   margin-top: 10px
   margin-bottom: 10px
+
+h3
+  font: 1.5em Source Sans Pro, Helvetica, Arial, sans-serif
+  color: $admin_nav_colour
 
 time
   font-size: 1.1em
@@ -45,21 +76,6 @@ article
     margin: auto
     width: 320px
 
-nav
-  padding: 20px 0px
-  ul
-    list-style-type: none
-    margin: 0
-    padding: 0
-    overflow: hidden
-    li
-      float: left
-      margin-right: 30px
-      a
-        display: block
-        text-align: center
-        text-decoration: none
-
 .pagination
   float: right
   a
@@ -71,181 +87,181 @@ nav
   padding: 0 !important
 
 // Admin interface
-.admin-body
-  font: 1em Roboto
-  h1
-    margin: 0 0 30px
-    font: 1.5em Roboto
-  a
-    text-decoration: none
-    cursor: pointer
-  input
-    font-size: 1em
-    height: 30px
-    border: 1px solid black
-    padding: 5px
-  nav
-    padding: 20px
-    a
-      font: 1em Roboto
-  input[type="submit"]
-    cursor: pointer
-  input[type="text"]
-    margin-left: 20px
-  .btn
-    border: 1px solid black
-    background-color: #efefef
-    font-size: 1em
-    font-family: 'Roboto'
-    padding: 5px
-    display: inline-block
-  .table
-    width: 100%
-    h2, time, a
-      font: 1em Roboto
-    h2, time
-      margin: 0
-    .table-contents
-      border: 1px solid black
-    .sortable
-      cursor: move
-    .row
-      padding: 20px
-      display: flex
-      flex-flow: row wrap
-      &:not(:first-child)
-        // border-top: 1px solid grey
-      div
-        flex: 1
-    input
-      margin-left: 0
-  .create-btn
-    font: 1em Roboto
-  .flash-message
-    position: fixed
-    left: 50%
-    right: 50%
-    transform: translate(-50%, -50%)
-    -webkit-transform: translate(-50%, -50%)
-    text-align: center
-    width: 150px
-    background-color: orange
-    border-radius: 2px
-    padding: 20px 10px
-    display: block
-    pointer-events: none
-    animation: flash 5s both
-    @keyframes flash
-      0%
-        margin-top: -200px
-      20%
-        margin-top: 30px
-      80%
-        margin-top: 30px
-        opacity: 1
-      100%
-        margin-top: 0px
-        opacity: 0
+// .admin-body
+//   font: 1em Roboto
+//   h1
+//     margin: 0 0 30px
+//     font: 1.5em Roboto
+//   a
+//     text-decoration: none
+//     cursor: pointer
+//   input
+//     font-size: 1em
+//     height: 30px
+//     border: 1px solid black
+//     padding: 5px
+//   nav
+//     padding: 20px
+//     a
+//       font: 1em Roboto
+//   input[type="submit"]
+//     cursor: pointer
+//   input[type="text"]
+//     margin-left: 20px
+//   .btn
+//     border: 1px solid black
+//     background-color: #efefef
+//     font-size: 1em
+//     font-family: 'Roboto'
+//     padding: 5px
+//     display: inline-block
+//   .table
+//     width: 100%
+//     h2, time, a
+//       font: 1em Roboto
+//     h2, time
+//       margin: 0
+//     .table-contents
+//       border: 1px solid black
+//     .sortable
+//       cursor: move
+//     .row
+//       padding: 20px
+//       display: flex
+//       flex-flow: row wrap
+//       &:not(:first-child)
+//         // border-top: 1px solid grey
+//       div
+//         flex: 1
+//     input
+//       margin-left: 0
+//   .create-btn
+//     font: 1em Roboto
+//   .flash-message
+//     position: fixed
+//     left: 50%
+//     right: 50%
+//     transform: translate(-50%, -50%)
+//     -webkit-transform: translate(-50%, -50%)
+//     text-align: center
+//     width: 150px
+//     background-color: orange
+//     border-radius: 2px
+//     padding: 20px 10px
+//     display: block
+//     pointer-events: none
+//     animation: flash 5s both
+//     @keyframes flash
+//       0%
+//         margin-top: -200px
+//       20%
+//         margin-top: 30px
+//       80%
+//         margin-top: 30px
+//         opacity: 1
+//       100%
+//         margin-top: 0px
+//         opacity: 0
 
-  // Layout page
-  .main-container
-    border: 1px solid black
-    width: 70vw
-    max-width: 800px
-    margin: 80px auto
-  .page-contents
-    padding: 20px
+//   // Layout page
+//   .main-container
+//     border: 1px solid black
+//     width: 70vw
+//     max-width: 800px
+//     margin: 80px auto
+//   .page-contents
+//     padding: 20px
 
-  // Navigation
-  nav
-    .logout
-      float: right
-      margin-right: 0
+//   // Navigation
+//   nav
+//     .logout
+//       float: right
+//       margin-right: 0
 
-  // Login page
-  &.login
-    form
-      border: 1px solid black
-      position: absolute
-      left: 50%
-      top: 50%
-      transform: translate(-50%, -50%)
-      padding: 30px
-      .form-line
-        display: flex
-        align-items: center
-        margin: 0 0 40px
-        *
-          flex-grow: 1
-          flex-basis: 100%
-      .submit-line
-        text-align: center
-        margin-bottom: 20px
-        input[type="submit"]
-          height: 40px
-          border: 1px solid black
-          display: inline-block
-          padding: 10px 20px
-          font-size: 1em
-      p
-        margin: 0 20px 0
+//   // Login page
+//   &.login
+//     form
+//       border: 1px solid black
+//       position: absolute
+//       left: 50%
+//       top: 50%
+//       transform: translate(-50%, -50%)
+//       padding: 30px
+//       .form-line
+//         display: flex
+//         align-items: center
+//         margin: 0 0 40px
+//         *
+//           flex-grow: 1
+//           flex-basis: 100%
+//       .submit-line
+//         text-align: center
+//         margin-bottom: 20px
+//         input[type="submit"]
+//           height: 40px
+//           border: 1px solid black
+//           display: inline-block
+//           padding: 10px 20px
+//           font-size: 1em
+//       p
+//         margin: 0 20px 0
 
-  // Article page
-  .article
-    .btn-container
-      display: flex
-      margin-top: 10px
+//   // Article page
+//   .article
+//     .btn-container
+//       display: flex
+//       margin-top: 10px
 
-  .editor-toolbar
-    opacity: 1
+//   .editor-toolbar
+//     opacity: 1
 
-  // Navigation page
-  .sort-save-btn
-    margin-top: 10px
+//   // Navigation page
+//   .sort-save-btn
+//     margin-top: 10px
 
-  // Uploads page
-  .uploads-form
-    border: 1px solid black
-    padding: 10px
-    margin-bottom: 20px
-    display: inline-block
-    input[type="file"]
-      border: none
-      display: block
-      padding: 0px
+//   // Uploads page
+//   .uploads-form
+//     border: 1px solid black
+//     padding: 10px
+//     margin-bottom: 20px
+//     display: inline-block
+//     input[type="file"]
+//       border: none
+//       display: block
+//       padding: 0px
 
-  .copy-btn
-    display: block
-    text-align: center
+//   .copy-btn
+//     display: block
+//     text-align: center
 
-  .images-container
-    display: block
-    border: 1px solid black
+//   .images-container
+//     display: block
+//     border: 1px solid black
 
-  .image-item
-    display: inline-block
-    margin: 10px
-    width: 100px
-    .image-wrap
-      position: relative
-      display: inline-block
-      width: 100px
-      height: 100px
-      border: 1px solid black
-      box-sizing: border-box
-      overflow: hidden
-    img
-      border: none
-      clip: rect(0px 100px 100px 0px)
-      height: 100px
-      position: absolute
-      box-sizing: border-box
-    input
-      width: 100%
-      margin-top: 5px
-      box-sizing: border-box
-    input[type="text"]
-      padding: 0px
-      margin-left: 0px
-      margin-bottom: 5px
-    input[type="submit"]
+//   .image-item
+//     display: inline-block
+//     margin: 10px
+//     width: 100px
+//     .image-wrap
+//       position: relative
+//       display: inline-block
+//       width: 100px
+//       height: 100px
+//       border: 1px solid black
+//       box-sizing: border-box
+//       overflow: hidden
+//     img
+//       border: none
+//       clip: rect(0px 100px 100px 0px)
+//       height: 100px
+//       position: absolute
+//       box-sizing: border-box
+//     input
+//       width: 100%
+//       margin-top: 5px
+//       box-sizing: border-box
+//     input[type="text"]
+//       padding: 0px
+//       margin-left: 0px
+//       margin-bottom: 5px
+//     input[type="submit"]

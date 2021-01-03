@@ -2,14 +2,26 @@ extends ../layout
 
 block content
     form(class="uploads-form" method="post" enctype="multipart/form-data" action="/admin/uploads")
-        input(type="file" name="file")
-        input(type="submit" value="submit")
+        div(class="input-file-container")
+            input(class="input-file" id="upload-file" type="file" name="file")
+            label(tabindex="0" for="upload-file" class="btn btn-invert input-file-trigger") Select a file
+            div(class="file-return")
+                p(class="file-return-text")
+        input(type='submit' class='btn')
     div(class="images-container")
         each file, index in files
             div(class="image-item")
                 div(class="image-wrap")
                     image(src=file)
-                form(method="post" action="/admin/uploads/delete")
-                    input(id="url-field"+index type="text" name="file" readonly value=file)
-                    a(class="copy-btn btn" onclick="copyUrl('url-field"+index+"')")="copy url"
-                    input(type="submit" value="delete")
+                form(id="delete-form" method="post" action="/admin/uploads/delete")
+                    input(class="url-field" id="url-field"+index type="text" name="file" readonly value=file)
+                    a(class="btn btn-invert" onclick="copyUrl('url-field"+index+"')")="Copy Url"
+                    a(id="delete-submit" class="btn btn-gray btn-trash")
+                        img(src="/images/icon-trash.svg")
+    
+    script.
+        $(document).ready(()=>{
+            $("#delete-submit").click(()=>{
+                $("#delete-form").submit();
+            })
+        });

@@ -1,22 +1,26 @@
 extends ../layout
 
 block content
-    a(class="create-btn" href='/admin/posts/create') Create post
     if (posts.length)
         div(class="table items")
             div(class="row")
-                div="Title"
-                div="Date"
+                div.list-width-100="Title"
+                div.list-width-50="Date"
                 div="Edit"
                 div="Delete"
             div(class="table-contents")
                     each post in posts
                         div(class="item row")
-                            div
+                            div.list-width-100
                                 h2=post.title
-                            div
-                                time!= moment(post.date).format("M/D/Y hh:mm")
+                            div.list-width-50
+                                time!= moment(post.date).format("M/D/Y HH:mm")
                             div
                                 a(href="posts/edit/" + post._id) Edit
                             div
-                                a(href="posts/delete/" + post._id) Delete
+                                a(href="posts/delete/" + post._id class="delete-btn")
+                                    img(src="/images/icon-trash.svg")
+    else 
+        h3 No posts available.
+        br
+    a(class="btn btn-invert create-btn" href='/admin/posts/create') Create post

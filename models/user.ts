@@ -4,20 +4,29 @@ import { IUserRepository } from './interfaces/Iuser';
 import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongoose';
 import { injectable } from 'inversify';
+import validator from 'validator';
 const crypto = require('crypto');
 
+// @index({ email: 1 }, { unique: true })
 class User {
     _id!: ObjectId;
     token!: string;
     password!: string;
     
-    @prop({ required: true })
+    @prop({ required: [true, "Email is required."], unique : true, 
+        validate: { 
+            validator : (value) => {
+                return validator.isEmail(value)
+            },
+            message: 'Email format is invalid.'
+        }
+    })
     public email!: string;
 
-    @prop({ required: true })
+    @prop({ required: [true, "Password is required."] })
     public hash!: string;
 
-    @prop({ required: true })
+    @prop()
     public salt!: string;
 
     @instanceMethod
@@ -36,6 +45,8 @@ class User {
 
     @instanceMethod
     public setPassword(password : string) {
+        if(!password)
+            return false
         this.salt = crypto.randomBytes(16).toString('hex');
         this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
     };
@@ -45,6 +56,11 @@ class User {
         const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
         return this.hash === hash;
     };
+
+    @instanceMethod
+    public isEmailUnique(email : string) {
+        return true;
+    }
 
     toAuthJSON = () => {
         return {

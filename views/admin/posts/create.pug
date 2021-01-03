@@ -2,23 +2,5 @@ extends ../layout
 
 block content
     body
-        form(action="/admin/posts/create" method="POST")
-            p Title:
-                input(type="text" name="title" placeholder="")
-            br
-            p Content:
-                textarea(id="post-body" name="body" placeholder="")
-            br
-            p Tags:
-                if (tags.length)
-                    select(name="tags")
-                        each tag in tags
-                            option(value=tag.id)=tag.title
-                        else
-                            p No Tags.
-            br
-            input(type="submit")
-    script.
-        $(document).ready(function(){
-            var simplemde = new SimpleMDE({ element: document.getElementById("post-body") });
-        });
+        form(action="/admin/posts/create" method="POST" class='edit-form' id="edit-form")
+            include ../includes/post-edit-form.pug

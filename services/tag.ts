@@ -23,14 +23,9 @@ export default class TagService implements ITagService{
   }
 
   public async updateTag(id : string, tagObject : ITagModel) {
-    let tag = await this.tagRepository.Tag.findOne({_id : id});
-
-    if(tag){
-        tag.title = tagObject.title;
-        tag.save();
-    }
-
-    return tag;
+    return await this.tagRepository.Tag.updateOne({_id : id}, {
+      title : tagObject.title,
+    }, { runValidators: true });
   }
 
   public async deleteTag(id : string) {

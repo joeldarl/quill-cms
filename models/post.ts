@@ -5,13 +5,13 @@ import { injectable } from 'inversify';
 import ITag from './interfaces/Itag';
 
 class Post implements IPost{
-    @prop({ required: true })
+    @prop({ required: [true, 'Title is required.'] })
     public title: string
 
-    @prop({ required: true, default: Date.now })
+    @prop({ required: [true, 'Date is required.'], default: Date.now })
     public date: Date
 
-    @prop({ required: true })
+    @prop({ required: [true, 'Content is required.'] })
     public body: string
 
     @prop({ ref:'Post' })

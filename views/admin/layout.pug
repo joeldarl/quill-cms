@@ -2,13 +2,24 @@ doctype html
 html
     include ./includes/head.pug
     body(class="admin-body" id="admin-body")
-        if (messages && messages.info)
-            span(class="flash-message")= messages.info
-        div(class="main-container")
-            include ./includes/nav.pug
-            div(class="page-contents")
-                h1=title
-                block content
+        span(class="flash-message warning" style=(messages && messages.errors) ? '' : 'display: none')
+            h2="Warning!"
+            <img src="/images/icon-alert-triangle.svg">
+            if (messages && messages.errors)
+                each message in messages.errors
+                    p="- "+message
+                    
+        span(class="flash-message notification" style=(messages && messages.notifications) ? '' : 'display: none')
+            <img src="/images/icon-alert-circle.svg">
+            if (messages && messages.notifications)
+                each message in messages.notifications
+                    p=message
+
+        include ./includes/nav.pug
+
+        main(class="main")
+            h1=title
+            block content
     footer
         script(src='/javascripts/simplemde.min.js')
         script(src='/javascripts/admin.js')

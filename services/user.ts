@@ -3,6 +3,7 @@ import { IUserModel, IUserRepository } from '../models/interfaces/Iuser';
 import TYPES from '../constant/types';
 import jwt from 'jsonwebtoken';
 import IUserService from './interfaces/Iuser';
+import "reflect-metadata";
 
 @injectable()
 export default class UserService implements IUserService {
@@ -26,20 +27,24 @@ export default class UserService implements IUserService {
 
   // Creating a new user
   public async createUser(userObject : IUserModel){
-    let user = await this.userRepository.User.findOne({
-      email: userObject.email
-    });
+    // let user = await this.userRepository.User.findOne({
+    //   email: userObject.email
+    // });
 
-    if(user) {
-      // User already exists, error needed.
-    }
-    else {
-      user = await new this.userRepository.User({email: userObject.email});
-      user.setPassword(userObject.password);
-      user.save();
-    }
+    // if(user) {
+    //   // User already exists, error needed.
+    // }
+    // else {
+    //   user = await new this.userRepository.User({email: userObject.email});
+    //   user.setPassword(userObject.password);
+    //   user.save();
+    // }
 
-    return user;
+    // return await this.userRepository.User.create({email: userObject.email})
+
+    let user = await new this.userRepository.User({email: userObject.email});
+    user.setPassword(userObject.password);
+    return await user.save();
   };
 
   public async getUsers() {

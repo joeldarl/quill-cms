@@ -3,8 +3,4 @@ extends ../layout
 block content
     body
         form(action="/admin/nav-items/update/"+navItem.id method="POST")
-            p Title:
-                input(type="text" name="title" value= navItem.title)
-            p Url:
-                input(type="text" name="url" value= navItem.url)
-            input(type="submit")
+            include ../includes/nav-item-edit-form.pug

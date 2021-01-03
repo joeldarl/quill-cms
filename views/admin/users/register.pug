@@ -2,10 +2,13 @@ extends ../layout
 
 block content
     body
-        h2= "Register"
         form(action="/admin/users/register" method="POST")
-            p Email:
-                input(type="text" name="email" placeholder="")
-            p Password:
+            div.input-group
+                label Email
+                input(type="text" name="email" placeholder="" value=(user && user.email) ? user.email : '')
+            br
+            div.input-group
+                label Password
                 input(type="text" name="password" placeholder="")
-            input(type="submit")
+            br
+            input(type="submit" class="btn")

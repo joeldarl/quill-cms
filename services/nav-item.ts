@@ -24,21 +24,14 @@ export default class NavItemService implements INavItemService{
     navItem.order = count + 1;
     navItem.title = navItemObject.title;
     navItem.url = navItemObject.url;
-    navItem.save();
-
-    return navItem;
+    return await navItem.save();
   }
 
   public async updateNavItem(id : string, navItemObject : INavItemModel) {
-    let navItem = await this.navItemRepository.NavItem.findOne({_id : id});
-
-    if(navItem){
-        navItem.title = navItemObject.title;
-        navItem.url = navItemObject.url;
-        navItem.save();
-    }
-
-    return navItem;
+    return await this.navItemRepository.NavItem.updateOne({_id : id}, {
+      title : navItemObject.title,
+      url : navItemObject.url,
+    }, { runValidators: true });
   }
 
   public async deleteNavItem(id : string) {

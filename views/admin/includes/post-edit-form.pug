@@ -1,0 +1,49 @@
+- var date
+if (post && post.date)
+    - var timestamp = Date.parse(post.date)
+    - date = new Date(timestamp)
+else
+    - date = new Date()
+
+- var content
+if (post && post.body)
+    - content = post.body
+
+div.column
+    div.input-group
+        label Title
+        input(type="text" id="post-title" name="title" value=(post && post.title) ? post.title : '')
+    br
+    div.input-group
+        label Content
+        textarea(id="post-body" name="body" value=(post && post.body) ? post.body : '')
+    br
+div.column
+    input(type="submit" class="btn" value="Save")
+    div.input-group-wrap
+        div.input-group.input-group-50
+            label Date
+            input(id="date-selector")
+        div.input-group.input-group-50
+            label Time
+            input(type="time" id="time-editor" value=(date.getHours() < 10 ? '0' : '') + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes())
+        input(type="hidden" name="date" id="date")
+    br
+    div.input-group
+        label Tag
+        if (tags.length)
+            select(name="tags")
+                each tag in tags
+                    if post && tag.id == post.tags[0]
+                        option(value=tag.id selected)=tag.title
+                    else
+                        option(value=tag.id)=tag.title
+                else
+                    p No Tags.
+
+script.
+    $(document).ready(function(){
+        var simplemde = new SimpleMDE({ element: document.getElementById("post-body") });
+        simplemde.value(!{JSON.stringify(content)});
+        flatpickr('#date-selector', {dateFormat: 'Y-m-d', defaultDate: !{JSON.stringify(date)}});
+    });

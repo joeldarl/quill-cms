@@ -1,19 +1,22 @@
 extends ../layout
 
 block content
-    a(class="create-btn" href='/admin/users/register') Register User
     if (users.length)
         div(class="table items")
             div(class="row")
-                div="Email"
-                div="ID"
+                div.list-width-100="Email"
+                //- div.list-width-50="ID"
                 div="Delete"
             div(class="table-contents")
                     each user in users
                         div(class="item row")
-                            div
+                            div.list-width-100
                                 h2=user.email
+                            //- div.list-width-50
+                            //-     h2=user.id
                             div
-                                h2=user.id
-                            div
-                                a(href="/admin/users/delete/" + user.id) Delete
+                                a(href="/admin/users/delete/" + user.id)
+                                    img(src="/images/icon-trash.svg")
+    else
+        h2 No users available.
+    a(class="btn btn-invert create-btn" href='/admin/users/register') Register User

@@ -1,15 +1,15 @@
-import { controller, httpGet, httpPost, httpPut, httpDelete, request, response, next} from 'inversify-express-utils';
+import { controller, httpGet, httpPost} from 'inversify-express-utils';
 import { inject } from 'inversify';
 import IUploadService from '../services/interfaces/Iupload';
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import TYPES from '../constant/types';
+import path from 'path';
 const auth = require('../auth/auth');
 const multer = require('multer');
 const moment = require('moment');
 const fse = require('fs-extra');
-import path from 'path';
 
-// SET STORAGE for uploads
+// Storage for uploads
 const storage = multer.diskStorage({
     destination: async function (req : Request, file : any, cb : any) {
         let date = moment(new Date());
@@ -46,17 +46,19 @@ export class UploadController {
     @httpGet('/', auth.required)
     public async getUploads(req : Request, res: Response) {
         let files = await this.uploadService.getUploads();
-        res.render('admin/uploads/read', {files : files});
+        res.render('admin/uploads/read', {files : files, title : 'Uploads'});
     }
 
     @httpPost('/', auth.required, upload.single('file'))
     public async uploadFile(req: Request, res: Response) {
+        req.flash('notifications', 'File uploaded.');
         res.redirect('/admin/uploads');
     }
 
     @httpPost('/delete', auth.required)
     public async delete(req: Request, res: Response) {
         await this.uploadService.deleteUpload(req.body.file);
+        req.flash('notifications', 'File deleted.');
         res.redirect('/admin/uploads');
     }
 }

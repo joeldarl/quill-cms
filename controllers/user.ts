@@ -10,8 +10,8 @@ export class UserController {
     constructor(@inject(TYPES.UserService) private userService: IUserService) {}
 
     @httpGet('/')
-    public getUsers(req : Request, res: Response) {
-        let users = this.userService.getUsers();
+    public async getUsers(req : Request, res: Response) {
+        let users = await this.userService.getUsers();
         return res.render('admin/users/read', {users, title: 'Users'});
     }
 
@@ -26,10 +26,12 @@ export class UserController {
         console.log(userValidate);
         if(userValidate) {
             res.cookie('auth', userValidate.token);
-            return res.redirect("/admin");
+            req.flash('notifications', 'Login successful.');
+            return res.redirect("/admin/posts");
         }
         else {
-            return res.redirect("/user/login");
+            req.flash('notifications', 'Login unsuccessful.');
+            return res.redirect("/admin/users/login");
         }
     }
 
@@ -41,13 +43,24 @@ export class UserController {
 
     @httpGet('/register')
     public getRegister(req: Request, res: Response){
-        return res.render('admin/users/register');
+        return res.render('admin/users/register', {title: 'Register User'});
     }
 
     @httpPost('/register')
     public async register(req: Request, res: Response) {
-        await this.userService.createUser(req.body);
-        return res.redirect('/admin/users/login');
+        try {
+            await this.userService.createUser(req.body);
+            req.flash('notifications', 'User registered.');
+            res.redirect('/admin/users');
+        }
+        catch (err) {
+            if (err.name == 'ValidationError'){
+                for (let field in err.errors) {
+                    req.flash('errors', err.errors[field].message);
+                }
+                res.render('admin/users/register', {tag : req.body, title: 'Register User'});
+            }
+        }
     }
 
     @httpGet('/:id')
@@ -55,9 +68,10 @@ export class UserController {
         return this.userService.getUser(request.params.id);
     }
 
-    @httpDelete('/:id')
+    @httpGet('/delete/:id')
     public async deleteUser(req: Request, res : Response) {
         await this.userService.deleteUser(req.params.id, req.cookies);
+        req.flash('notifications', 'User deleted.');
         return res.redirect('/admin/users');
     }
 }

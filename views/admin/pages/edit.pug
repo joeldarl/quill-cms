@@ -3,16 +3,4 @@ extends ../layout
 block content
     body
         form(action="/admin/pages/update/"+page.id method="POST")
-            p Title:
-                input(type="text" name="title" value= page.title)
-            p Url:
-                input(type="text" name="url" placeholder="" value= page.url)
-            br
-            p Content:
-            textarea(id="page-body" name="body")
-            input(type="submit")
-    script.
-        $(document).ready(function(){
-            var simplemde = new SimpleMDE({ element: document.getElementById("page-body") });
-            simplemde.value(`#{page.body}`);
-        });
+            include ../includes/page-edit-form.pug

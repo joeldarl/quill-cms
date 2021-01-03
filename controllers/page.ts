@@ -13,36 +13,59 @@ export class PageController {
     @httpGet('/', auth.required)
     public async getPages(req : Request, res: Response) {
         let pages = await this.pageService.getPages();
-        res.render('admin/pages/read', {pages : pages});
+        res.render('admin/pages/read', {pages : pages, title : 'Pages'});
     }
 
     @httpGet('/create', auth.required)
     public async viewCreatePage(req : Request, res: Response) {
-        res.render('admin/pages/create');
+        res.render('admin/pages/create', {title: 'Create Page'});
     }
 
     @httpPost('/create', auth.required)
     public async createPage(req : Request, res: Response) {
-        let page = await this.pageService.createPage(req.body);
-        if(page)
-        res.redirect('/admin/pages');
+        try {
+            await this.pageService.createPage(req.body);
+            req.flash('notifications', 'Page created.');
+            res.redirect('/admin/pages');
+        }
+        catch (err) {
+            if (err.name == 'ValidationError'){
+                for (let field in err.errors) {
+                    req.flash('errors', err.errors[field].message);
+                }
+                res.render('admin/pages/create', {page : req.body, title: 'Create Page'});
+            }
+        }
     }
 
     @httpGet('/edit/:id', auth.required)
     public async viewUpdatePage(req : Request, res: Response) {
         let page = await this.pageService.getPage(req.params.id);
-        res.render('admin/pages/edit', {page : page});
+        res.render('admin/pages/edit', {page : page, title: 'Edit Page'});
     }
 
     @httpPost('/update/:id', auth.required)
     public async updatePage(req : Request, res: Response) {
-        let page = await this.pageService.updatePage(req.params.id, req.body);
-        res.redirect('/admin/pages');
+        try {
+            await this.pageService.updatePage(req.params.id, req.body);
+            req.flash('notifications', 'Page updated.');
+            res.redirect('/admin/pages');
+        }
+        catch (err) {
+            if (err.name == 'ValidationError'){
+                for (let field in err.errors) {
+                    req.flash('errors', err.errors[field].message);
+                }
+                req.body._id = req.params.id;
+                res.render('admin/pages/edit', {page : req.body, title: 'Edit Post'});
+            }
+        }
     }
 
     @httpGet('/delete/:id', auth.required)
     public async deletePage(req : Request, res: Response) {
         await this.pageService.deletePage(req.params.id);
+        req.flash('notifications', 'Page deleted.');
         res.redirect('/admin/pages');
     }
 

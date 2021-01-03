@@ -3,7 +3,7 @@ import IPost, { IPostModel, IPostRepository } from '../models/interfaces/Ipost';
 import TYPES from '../constant/types';
 import IPostService from './interfaces/Ipost';
 import { post } from 'typegoose';
-import { convertToObject } from 'typescript';
+import { convertToObject, resolveModuleName } from 'typescript';
 
 @injectable()
 export default class PostService implements IPostService {
@@ -27,6 +27,7 @@ export default class PostService implements IPostService {
   public async createPost(postObject : IPostModel) {
     let post = await new this.postRepository.Post({
         title : postObject.title,
+        date : postObject.date,
         body : postObject.body,
         tags : postObject.tags
     }).save();
@@ -35,18 +36,12 @@ export default class PostService implements IPostService {
   }
 
   public async updatePost(id : string, postObject : IPostModel) {
-    let post = await this.postRepository.Post.findOne({_id : id});
-
-    if(post){
-        post.title = postObject.title;
-        post.body = postObject.body;
-        post.tags = postObject.tags;
-        post.save();
-
-        return post;
-    }
-    else
-    return {}
+    return await this.postRepository.Post.updateOne({_id : id}, {
+      title : postObject.title,
+      date : postObject.date,
+      body : postObject.body,
+      tags : postObject.tags,
+    }, { runValidators: true });
   }
 
   public async deletePost(id : string) {

@@ -1,12 +1,17 @@
 import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import express from 'express';
+import flash from 'express-flash';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import cookieSession from 'cookie-parser';
 import { Container } from 'inversify';
 import TYPES from './constant/types';
 import path from 'path';
 import * as bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-var cookieParser = require('cookie-parser');
+import { Request, Response, NextFunction } from 'express';
+import Crypto from 'crypto';
 var sassMiddleware = require('node-sass-middleware');
 
 // .env
@@ -94,8 +99,26 @@ server.setConfig((app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 
+  // app.use(session());
+  app.use(session({ 
+    secret: Crypto.randomBytes(48).toString('hex'), 
+    cookie: { maxAge: 60000 }, 
+    resave: false, 
+    saveUninitialized: false 
+  }));
+  app.use(cookieParser('secret'));
+  // app.use(cookieSession());
+  app.use(flash());
+
+  // Including path in locals
+  var locals = function(req : Request, res : Response, next : NextFunction) {
+    res.locals.path = req.path;
+    next();
+  }
+  app.use(locals);
+
   // Error handler
-  app.use(function(err:any, req:any, res:any, next:any) {
+  app.use(function(err : any, req : Request, res : Response, next : NextFunction) {
     // Set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env').trim() === 'development' ? err : {};
