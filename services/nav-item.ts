@@ -23,11 +23,18 @@ export default class NavItemService implements INavItemService{
     
     navItem.order = count + 1;
     navItem.title = navItemObject.title;
+
+    if(navItemObject.url.charAt(0) != '/')
+    navItemObject.url = '/' + navItemObject.url;
     navItem.url = navItemObject.url;
+
     return await navItem.save();
   }
 
   public async updateNavItem(id : string, navItemObject : INavItem) {
+    if(navItemObject.url.charAt(0) != '/')
+    navItemObject.url = '/' + navItemObject.url;
+
     return await this.navItemRepository.NavItem.updateOne({_id : id}, {
       title : navItemObject.title,
       url : navItemObject.url,
@@ -46,6 +53,7 @@ export default class NavItemService implements INavItemService{
             navItem.save();
         }
     }
+    
     return true;
   }
 }

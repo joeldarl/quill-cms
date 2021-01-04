@@ -28,6 +28,8 @@ export default class PageService implements IPageService {
   }
 
   public async createPage(pageObject : IPage) {
+    if(pageObject.url.charAt(0) != '/')
+      pageObject.url = '/' + pageObject.url;
     return await new this.pageRepository.Page({
         title : pageObject.title,
         url : pageObject.url,
@@ -36,6 +38,8 @@ export default class PageService implements IPageService {
   }
 
   public async updatePage(id : string, pageObject : IPage) {
+    if(pageObject.url.charAt(0) != '/')
+      pageObject.url = '/' + pageObject.url;
     return await this.pageRepository.Page.updateOne({_id : id}, {
       title : pageObject.title,
       url : pageObject.url,

@@ -2,5 +2,5 @@ extends ../layout
 
 block content
     body
-        form(action="/admin/pages/update/"+page.id method="POST")
+        form(action="/admin/pages/update/"+page._id method="POST")
             include ../includes/page-edit-form.pug

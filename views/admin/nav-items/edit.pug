@@ -2,5 +2,5 @@ extends ../layout
 
 block content
     body
-        form(action="/admin/nav-items/update/"+navItem.id method="POST")
+        form(action="/admin/nav-items/update/"+navItem._id method="POST")
             include ../includes/nav-item-edit-form.pug

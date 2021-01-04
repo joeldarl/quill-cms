@@ -24,7 +24,8 @@ export default class PostService implements IPostService {
   }
 
   public async getPostsPaginated(page : number, limit : number, html : boolean = false) {
-    let posts = await this.postRepository.Post.find()      
+    let posts = await this.postRepository.Post.find()
+      .sort('-date')      
       .limit(limit)
       .skip((page as number -1) * (limit as number))
       .exec();
