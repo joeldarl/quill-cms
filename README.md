@@ -7,7 +7,7 @@ A publishing CMS developed using NodeJS, TypeScript and MongoDB. This project is
 - Markdown(.md) support
 
 ## Installation
-1. Download the repository and use the `npm install` command to install package dependencies.
+1. Download or clone the repository and use the `npm install` command to install package dependencies.
 
 2. Make sure you have a MongoDB server running! (https://docs.mongodb.com/manual/administration/install-community/)
 

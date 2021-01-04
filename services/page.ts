@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { IPageModel, IPageRepository } from '../models/interfaces/Ipage';
+import IPage, { IPageModel, IPageRepository } from '../models/interfaces/Ipage';
 import IPageService from './interfaces/Ipage';
 import TYPES from '../constant/types';
 import showdown from 'showdown'
@@ -27,7 +27,7 @@ export default class PageService implements IPageService {
     return page;
   }
 
-  public async createPage(pageObject : IPageModel) {
+  public async createPage(pageObject : IPage) {
     return await new this.pageRepository.Page({
         title : pageObject.title,
         url : pageObject.url,
@@ -35,7 +35,7 @@ export default class PageService implements IPageService {
     }).save();
   }
 
-  public async updatePage(id : string, pageObject : IPageModel) {
+  public async updatePage(id : string, pageObject : IPage) {
     return await this.pageRepository.Page.updateOne({_id : id}, {
       title : pageObject.title,
       url : pageObject.url,

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { IUserModel, IUserRepository } from '../models/interfaces/Iuser';
+import IUser, { IUserModel, IUserRepository } from '../models/interfaces/Iuser';
 import TYPES from '../constant/types';
 import jwt from 'jsonwebtoken';
 import IUserService from './interfaces/Iuser';
@@ -10,7 +10,7 @@ export default class UserService implements IUserService {
 
   constructor (@inject(TYPES.UserRepository) private userRepository: IUserRepository) {}
 
-  public async login(user: IUserModel) {
+  public async login(user: IUser) {
     let userObject = await this.userRepository.User.findOne({email: user.email});
     
     if(!userObject){
@@ -26,7 +26,7 @@ export default class UserService implements IUserService {
   }
 
   // Creating a new user
-  public async createUser(userObject : IUserModel){
+  public async createUser(userObject : IUser){
     let user = await new this.userRepository.User({email: userObject.email});
     user.setPassword(userObject.password);
     return await user.save();
@@ -40,7 +40,7 @@ export default class UserService implements IUserService {
     return await this.userRepository.User.findOne({_id: id});
   }
 
-  public async updateUser(id : string, body : IUserModel) {
+  public async updateUser(id : string, body : IUser) {
     // TODO: Add update user feature.
     return;
   }

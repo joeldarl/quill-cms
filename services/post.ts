@@ -1,5 +1,5 @@
 import { inject, injectable, postConstruct } from 'inversify';
-import { IPostModel, IPostRepository } from '../models/interfaces/Ipost';
+import IPost, { IPostModel, IPostRepository } from '../models/interfaces/Ipost';
 import TYPES from '../constant/types';
 import IPostService from './interfaces/Ipost';
 import showdown from 'showdown';
@@ -43,7 +43,7 @@ export default class PostService implements IPostService {
     return this.postRepository.Post.countDocuments().exec();
   }
 
-  public async createPost(postObject : IPostModel) {
+  public async createPost(postObject : IPost) {
     let post = await new this.postRepository.Post({
         title : postObject.title,
         date : postObject.date,
@@ -54,7 +54,7 @@ export default class PostService implements IPostService {
     return post;
   }
 
-  public async updatePost(id : string, postObject : IPostModel) {
+  public async updatePost(id : string, postObject : IPost) {
     return await this.postRepository.Post.updateOne({_id : id}, {
       title : postObject.title,
       date : postObject.date,

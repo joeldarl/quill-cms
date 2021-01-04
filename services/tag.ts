@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { ITagModel, ITagRepository } from '../models/interfaces/Itag';
+import ITag, { ITagModel, ITagRepository } from '../models/interfaces/Itag';
 import ITagService from './interfaces/Itag';
 import TYPES from '../constant/types';
 
@@ -16,13 +16,13 @@ export default class TagService implements ITagService{
     return await this.tagRepository.Tag.find();
   }
 
-  public async createTag(tagObject : ITagModel) {
+  public async createTag(tagObject : ITag) {
     return await new this.tagRepository.Tag({
         title : tagObject.title,
     }).save();
   }
 
-  public async updateTag(id : string, tagObject : ITagModel) {
+  public async updateTag(id : string, tagObject : ITag) {
     return await this.tagRepository.Tag.updateOne({_id : id}, {
       title : tagObject.title,
     }, { runValidators: true });

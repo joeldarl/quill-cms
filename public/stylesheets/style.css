@@ -511,10 +511,9 @@ article {
     letter-spacing: 1px; }
   article p {
     font-family: Untitled Sans; }
-
-time {
-  font-size: 1.1em;
-  font-family: Untitled Sans; }
+  article time {
+    font-size: 1.1em;
+    font-family: Untitled Sans; }
 
 body {
   font: 14px Source Sans Pro, Helvetica, Arial, sans-serif;

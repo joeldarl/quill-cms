@@ -1,6 +1,4 @@
-import { ReturnModelType } from '@typegoose/typegoose';
 import { ModelType } from 'typegoose';
-import  User  from '../user'
 
 export default interface IUser {
     email: string;

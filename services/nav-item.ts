@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { INavItemModel, INavItemRepository } from '../models/interfaces/Inav-item';
+import INavItem, { INavItemModel, INavItemRepository } from '../models/interfaces/Inav-item';
 import INavItemService from './interfaces/Inav-item';
 import TYPES from '../constant/types';
 
@@ -16,7 +16,7 @@ export default class NavItemService implements INavItemService{
     return await this.navItemRepository.NavItem.find().sort('order');
   }
 
-  public async createNavItem(navItemObject : INavItemModel) {
+  public async createNavItem(navItemObject : INavItem) {
     let navItem = await new this.navItemRepository.NavItem();
 
     let count : number = await this.navItemRepository.NavItem.count();
@@ -27,7 +27,7 @@ export default class NavItemService implements INavItemService{
     return await navItem.save();
   }
 
-  public async updateNavItem(id : string, navItemObject : INavItemModel) {
+  public async updateNavItem(id : string, navItemObject : INavItem) {
     return await this.navItemRepository.NavItem.updateOne({_id : id}, {
       title : navItemObject.title,
       url : navItemObject.url,
