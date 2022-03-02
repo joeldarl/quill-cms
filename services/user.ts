@@ -25,11 +25,15 @@ export default class UserService implements IUserService {
     return userObject;
   }
 
-  // Creating a new user
+  /**
+   * Create a user.
+   * @param userObject 
+   * @returns 
+   */
   public async createUser(userObject : IUser){
     let user = await new this.userRepository.User({email: userObject.email});
     user.setPassword(userObject.password);
-    return await user.save();
+    return user.save();
   };
 
   public async getUsers() {
@@ -47,7 +51,7 @@ export default class UserService implements IUserService {
 
   public async deleteUser(id: string, cookies : any) {
     let secret : any = process.env.JWT_SECRET;
-    let user = jwt.decode(cookies.auth, secret);
+    let user : any = jwt.decode(cookies.auth, secret);
 
     if (user && user.id == id) {
         return {};

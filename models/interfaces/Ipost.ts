@@ -1,4 +1,4 @@
-import { ModelType } from 'typegoose';
+import { ModelType } from '@typegoose/typegoose';
 import { ObjectId } from 'mongoose';
 
 export default interface IPost {

@@ -1,5 +1,4 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { instanceMethod } from 'typegoose';
 import { IUserRepository } from './interfaces/Iuser';
 import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongoose';
@@ -29,7 +28,6 @@ class User {
     @prop()
     public salt!: string;
 
-    @instanceMethod
     public generateJWT (){
         const today = new Date();
         const expirationDate = new Date(today);
@@ -43,7 +41,6 @@ class User {
         }, secret);
     };
 
-    @instanceMethod
     public setPassword(password : string) {
         if(!password)
             return false
@@ -51,13 +48,11 @@ class User {
         this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
     };
     
-    @instanceMethod
     public validatePassword(password : string) {
         const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
         return this.hash === hash;
     };
 
-    @instanceMethod
     public isEmailUnique(email : string) {
         return true;
     }

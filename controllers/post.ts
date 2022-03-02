@@ -21,12 +21,22 @@ export class PostController {
         res.render('admin/posts/read', {posts : posts, moment : moment, title: 'Posts'});
     }
 
+    /**
+     * View the post creation screen.
+     * @param req 
+     * @param res 
+     */
     @httpGet('/create', auth.required)
     public async viewCreatePost(req : Request, res: Response) {
         let tags = await this.tagService.getTags();
         res.render('admin/posts/create', {tags : tags, title: 'Create Post'});
     }
 
+    /**
+     * Create a post.
+     * @param req 
+     * @param res 
+     */
     @httpPost('/create', auth.required)
     public async createPost(req : Request, res: Response) {
         try {
@@ -45,6 +55,11 @@ export class PostController {
         }
     }
 
+    /**
+     * View post update screen.
+     * @param req 
+     * @param res 
+     */
     @httpGet('/edit/:id', auth.required)
     public async viewUpdatePost(req : Request, res: Response) {
         let post = await this.postService.getPost(req.params.id);

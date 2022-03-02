@@ -65,11 +65,7 @@ if(!process.env.JWT_SECRET){
   throw new Error('No jwt secret specified.')
 }
 
-mongoose.connect(process.env.DB_URI, {
-  useNewUrlParser: true, 
-  useUnifiedTopology: true, 
-  useCreateIndex: true
-});
+mongoose.connect(process.env.DB_URI);
 mongoose.set('debug', false);
 mongoose.Promise = global.Promise;
 

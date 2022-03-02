@@ -1,4 +1,4 @@
-import { ModelType } from 'typegoose';
+import { ModelType } from '@typegoose/typegoose';
 
 export default interface IUser {
     email: string;

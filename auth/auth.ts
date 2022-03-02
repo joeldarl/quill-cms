@@ -12,6 +12,9 @@ const getTokenFromHeaders = (req : Request) => {
 
 const secret : any = process.env.JWT_SECRET;
 
+//console.log(secret);
+//process.exit();
+
 const auth = {
     required: jwt({
         secret: secret,
